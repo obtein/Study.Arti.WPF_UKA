@@ -10,9 +10,6 @@
     <Window.DataContext>
         <vm:SerialCommunicationViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -25,7 +22,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!-- SerialCommunication Panel -->
-        <Grid Grid.Row="0" Grid.Column="0">
+        <Grid IsEnabled="{Binding IsSerialPaneEnabled}" Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -41,20 +38,20 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Port" Grid.Row="0" Grid.Column="0"/>
-            <ComboBox Grid.Row="0" Grid.Column="1"/>
+            <ComboBox Grid.Row="0" ItemsSource="{Binding ComPortList}" SelectedValue="{Binding SerialPortToBeOpenedDetails[1], UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
             <Label Content="BaudRate" Grid.Row="1" Grid.Column="0"/>
-            <ComboBox ItemsSource="{Binding BaudRateList}" Grid.Row="1" Grid.Column="1"/>
+            <ComboBox ItemsSource="{Binding BaudRateList}" SelectedValue="{Binding SerialPortToBeOpenedDetails[2], UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
             <Label Content="Parity" Grid.Row="2" Grid.Column="0"/>
-            <ComboBox ItemsSource="{Binding ParityList}" Grid.Row="2" Grid.Column="1"/>
+            <ComboBox ItemsSource="{Binding ParityList}" SelectedValue="{Binding SerialPortToBeOpenedDetails[3], UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"/>
             <Label Content="StopBit" Grid.Row="3" Grid.Column="0"/>
-            <ComboBox ItemsSource="{Binding StopBitList}" Grid.Row="3" Grid.Column="1"/>
+            <ComboBox ItemsSource="{Binding StopBitList}" SelectedValue="{Binding SerialPortToBeOpenedDetails[4], UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"/>
             <Label Content="HandShake" Grid.Row="4" Grid.Column="0"/>
-            <ComboBox ItemsSource="{Binding HandShakeList}" Grid.Row="4" Grid.Column="1"/>
+            <ComboBox ItemsSource="{Binding HandShakeList}" SelectedValue="{Binding SerialPortToBeOpenedDetails[5], UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1"/>
             <Label Content="ReadTO" Grid.Row="5" Grid.Column="0"/>
-            <TextBox Text="{Binding DesiredReadTimeOUT, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1"/>
+            <TextBox Text="{Binding SerialPortToBeOpenedDetails[6], UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1"/>
             <Label Content="WriteTO" Grid.Row="6" Grid.Column="0"/>
-            <TextBox Text="{Binding DesiredWriteTimeOUT, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1"/>
-            <Button Content="Connect" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <TextBox Text="{Binding SerialPortToBeOpenedDetails[7], UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1"/>
+            <Button Content="Connect" Command="{Binding OpenSerialPortCommand}" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
         <!-- Logo and Communication Selection Panel -->
         <Grid Grid.Row="0" Grid.Column="1">
@@ -68,7 +65,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Serial" Grid.Row="3" Grid.Column="0"/>
+            <Button Content="Serial" Command="{Binding SerialCommunicationSelectedCommand}" Grid.Row="3" Grid.Column="0"/>
             <Button Content="Ethernet" Grid.Row="3" Grid.Column="1"/>
         </Grid>
         <!-- Ethernet Panel -->
@@ -99,8 +96,8 @@
             </Grid.ColumnDefinitions>
             <!--Indicator for device is active or not-->
             <Canvas Background="DarkSlateGray" Grid.Row="0" Grid.RowSpan="11" Grid.Column="0"/>
-            <Canvas Background="ForestGreen" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"/>
-            <Canvas Background="ForestGreen" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4"/>
+            <Canvas Background="{Binding CanvasBackground0}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"/>
+            <Canvas Background="{Binding CanvasBackground0}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4"/>
             <Canvas Background="DarkSlateGray" Grid.Row="0" Grid.RowSpan="11" Grid.Column="5"/>
             <!--Device outs-->
             <Label Content="CARD 0" Grid.Row="1" Grid.Column="1"/>
@@ -141,8 +138,8 @@
             </Grid.ColumnDefinitions>
             <!--Indicator for device is active or not-->
             <Canvas Background="DarkSlateGray" Grid.Row="0" Grid.RowSpan="11" Grid.Column="0"/>
-            <Canvas Background="ForestGreen" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"/>
-            <Canvas Background="ForestGreen" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4"/>
+            <Canvas Background="{Binding CanvasBackground1}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"/>
+            <Canvas Background="{Binding CanvasBackground1}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4"/>
             <Canvas Background="DarkSlateGray" Grid.Row="0" Grid.RowSpan="11" Grid.Column="5"/>
             <!--Device outs-->
             <Label Content="CARD 0" Grid.Row="1" Grid.Column="1"/>
@@ -183,8 +180,8 @@
             </Grid.ColumnDefinitions>
             <!--Indicator for device is active or not-->
             <Canvas Background="DarkSlateGray" Grid.Row="0" Grid.RowSpan="11" Grid.Column="0"/>
-            <Canvas Background="ForestGreen" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"/>
-            <Canvas Background="ForestGreen" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4"/>
+            <Canvas Background="{Binding CanvasBackground2}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"/>
+            <Canvas Background="{Binding CanvasBackground2}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4"/>
             <Canvas Background="DarkSlateGray" Grid.Row="0" Grid.RowSpan="11" Grid.Column="5"/>
             <!--Device outs-->
             <Label Content="CARD 0" Grid.Row="1" Grid.Column="1"/>
@@ -202,7 +199,19 @@
         </Grid>
         <!-- Log -->
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <ListView></ListView>
+            <ListView ItemsSource="{Binding MessageList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="Time  " Foreground="Blue" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding MessageDateTime}" Foreground="Blue" FontWeight="Bold" />
+                            <TextBlock Text=" >>>> " />
+                            <TextBlock Text=" Received >>> " Foreground="Green" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding MessageToShow}" Foreground="Green" FontWeight="Bold"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
         <!-- Utilities -->
         <Grid Grid.Row="2" Grid.Column="2">

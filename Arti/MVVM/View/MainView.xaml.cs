@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Arti.MVVM.Model;
 using Arti.MVVM.ViewModel;
 
 namespace Arti.MVVM.View
@@ -20,7 +21,6 @@ namespace Arti.MVVM.View
     /// </summary>
     public partial class MainView : Window
     {
-        SerialCommunicationViewModel scvm = new SerialCommunicationViewModel();
         public MainView ()
         {
             InitializeComponent();

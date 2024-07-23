@@ -1,20 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Xml.Linq;
 using Arti.MVVM.Model;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Arti.MVVM.ViewModel
 {
-    public class SerialCommunicationViewModel : INotifyPropertyChanged
+    partial class SerialCommunicationViewModel : INotifyPropertyChanged
     {
+
         #region Variables
 
-        #region SerialCommunication
+        #region Variables.SerialCommunication
         /// <summary>
         /// Serialport to be opened thruough user selections will have these variables
         /// 0 = deviceId (string) 
@@ -23,18 +34,16 @@ namespace Arti.MVVM.ViewModel
         /// 3 = parityListIndex   | 6 = ReadTimeOut     (int)
         /// 4 = stopBitIndex      | 7 = WriteTimeOut    (int)
         /// </summary>
-        List<object> serialPortToBeOpenedDetails = new List<object>();
+        private ObservableCollection<object> serialPortToBeOpenedDetails;
+        public ObservableCollection<object> SerialPortToBeOpenedDetails
+        {
+            get => serialPortToBeOpenedDetails;
+            set => serialPortToBeOpenedDetails = value;
+        }
         // SerialCommunicationModel to be created
         SerialCommunicationModel scModel;
         // SerialPort to be used
         SerialPort sp;
-        // For collecting data from serial port
-        private StringBuilder dataReceiverBuffer;
-        public StringBuilder DataReceiverBuffer
-        {
-            get => dataReceiverBuffer;
-            set => dataReceiverBuffer = value;
-        }
         // To check if communication active
         private bool isCommunicationActive;
         public bool IsCommunicationActive
@@ -48,9 +57,38 @@ namespace Arti.MVVM.ViewModel
                 isCommunicationActive = value;
             }
         }
-        #endregion Serial Communication
 
-        #region View
+        private string serialDataReceived;
+
+        public string SerialDataReceived
+        {
+            get => serialDataReceived;
+            set
+            {
+                if ( serialDataReceived != value )
+                {
+                    serialDataReceived = value;
+                    OnPropertyChanged( nameof( SerialDataReceived ) );
+                    Trace.WriteLine( $"+++++++++ Data changed on ViewModel : {SerialDataReceived}" );
+                }
+            }
+        }
+        #endregion Variables.SerialCommunication
+
+        #region Variables.View
+        private ObservableCollection<MessageModel> messageList;
+        public ObservableCollection<MessageModel> MessageList
+        {
+            get
+            {
+                return messageList;
+            } 
+            set 
+            {
+                messageList = value;
+                OnPropertyChanged( nameof( MessageList ) );
+            }
+        }
         private int [] baudRateList = { 110, 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 256000 };
         public int [] BaudRateList
         {
@@ -71,158 +109,292 @@ namespace Arti.MVVM.ViewModel
         {
             get => handShakeList;
         }
-        private string dataReceivedSerial;
-        public string DataReceivedSerial
+
+        private string[] comPortList;
+
+        public string[] ComPortList
         {
-            get
-            {
-                return dataReceivedSerial;
-            }
+            get => comPortList;
             set
             {
-                dataReceivedSerial = value;
-                PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( nameof( DataReceivedSerial ) ) );
+                if ( comPortList != value )
+                {
+                    comPortList = value;
+                    OnPropertyChanged( nameof( ComPortList ) );
+                }
             }
         }
 
-        private int desiredReadTimeOUT;
-        public int DesiredReadTimeOUT
+
+        private System.Timers.Timer blinkTimer0;
+        private bool isBlinking0;
+        private System.Timers.Timer blinkTimer1;
+        private bool isBlinking1;
+        private System.Timers.Timer blinkTimer2;
+        private bool isBlinking2;
+        private Brush canvasBackground0;
+        public Brush CanvasBackground0
         {
             get
             {
-                return desiredReadTimeOUT;
+                return canvasBackground0;
             }
             set
             {
-                desiredReadTimeOUT = value;
+                if ( canvasBackground0 != value )
+                {
+                    canvasBackground0 = value;
+                    OnPropertyChanged( nameof( CanvasBackground0 ) );
+                }
             }
         }
-
-        private int desiredWriteTimeOUT;
-        public int DesiredWriteTimeOUT
+        private Brush canvasBackground1;
+        public Brush CanvasBackground1
         {
             get
             {
-                return desiredWriteTimeOUT;
+                return canvasBackground1;
             }
             set
             {
-                desiredWriteTimeOUT = value;
+                if ( canvasBackground1 != value )
+                {
+                    canvasBackground1 = value;
+                    OnPropertyChanged( nameof( CanvasBackground1 ) );
+                }
+            }
+        }
+        private Brush canvasBackground2;
+        public Brush CanvasBackground2
+        {
+            get
+            {
+                return canvasBackground2;
+            }
+            set
+            {
+                if ( canvasBackground2 != value )
+                {
+                    canvasBackground2 = value;
+                    OnPropertyChanged( nameof( CanvasBackground2 ) );
+                }
             }
         }
 
-        #endregion View
+        private bool isCard0Connected = false;
+        private bool isCard1Connected = false;
+        private bool isCard2Connected = false;
+        private bool isSerialPanelEnabled;
+
+        public bool IsSerialPaneEnabled
+        {
+            get
+            {
+                return isSerialPanelEnabled;
+            }
+            set
+            {
+                if ( isSerialPanelEnabled != value )
+                {
+                    isSerialPanelEnabled = value;
+                    OnPropertyChanged( nameof( IsSerialPaneEnabled ) );
+                }
+            }
+        }
+
+        #endregion Variables.View
+
+        #region Variables.Commands
+        public ICommand SerialCommunicationSelectedCommand
+        {
+            get; set;
+        }
+        public ICommand OpenSerialPortCommand
+        {
+            get; set;
+        }
+        public ICommand StartBlinkingCommand
+        {
+            get; set;
+        }
+        #endregion Variables.Commands
+
 
         #endregion Variables
 
         #region Constructors
         public SerialCommunicationViewModel ()
         {
-            
+            Trace.WriteLine( "ViewModelConstructor" );
+            IsSerialPaneEnabled = false;
+            CanvasBackground0 = Brushes.DarkGray;
+            CanvasBackground1 = Brushes.DarkGray;
+            CanvasBackground2 = Brushes.DarkGray;
+            serialPortToBeOpenedDetails = new ObservableCollection<object>( new object [10] );
+            MessageList = new ObservableCollection<MessageModel>();
+            SerialCommunicationSelectedCommand = new RelayCommand(SerialCommunicationSelected);
+            OpenSerialPortCommand = new RelayCommand(OpenSerialPortConnection);
+            StartBlinkingCommand = new RelayCommand(StartBlinkingConnected);
+            StartBlinkingConnected();
         }
+
         #endregion Constructors
 
 
         #region Methods
-        #region SerialPort
+
+        #region Methods.SerialPort
+
         public void OpenSerialPortConnection ()
         {
+            serialPortToBeOpenedDetails [0] = "Hello";
+            int tempBaudRate = Convert.ToInt32( serialPortToBeOpenedDetails [2] );
+            int tempReadTimeOUT = Convert.ToInt32( serialPortToBeOpenedDetails [6] );
+            int tempWriteTimeOUT = Convert.ToInt32( serialPortToBeOpenedDetails [7] );
+            MessageList = new ObservableCollection<MessageModel>();
             scModel = new SerialCommunicationModel( (string)serialPortToBeOpenedDetails [0],
                                                     (string)serialPortToBeOpenedDetails [1],
-                                                    (int)serialPortToBeOpenedDetails [2],
-                                                    (int)serialPortToBeOpenedDetails [3],
-                                                    (int)serialPortToBeOpenedDetails [4],
-                                                    (int)serialPortToBeOpenedDetails [5],
-                                                    (int)serialPortToBeOpenedDetails [6],
-                                                    (int)serialPortToBeOpenedDetails [7] );
-            sp = scModel.SelectedSerialPort;
-            sp.DataReceived += async ( sender, e ) => await OnDataReceivedAsync();
-            IsCommunicationActive = false;
+                                                    tempBaudRate,
+                                                    (Parity)serialPortToBeOpenedDetails [3],
+                                                    (StopBits)serialPortToBeOpenedDetails [4],
+                                                    (Handshake)serialPortToBeOpenedDetails [5],
+                                                    tempReadTimeOUT,
+                                                    tempWriteTimeOUT );
+            scModel.PropertyChanged += new PropertyChangedEventHandler( DataReceived_PropertyChanged );
         }
 
+
+        #endregion Methods.SerialPort
+
+        #region Methods.UI
+
         /// <summary>
-        /// Sends data to listener
+        /// To mimic blinking effect around device UI when connected
         /// </summary>
-        /// <param name="data"> data to be send </param>
-        public void SendData ( string data )
+        private void StartBlinkingConnected ()
         {
-            if ( sp.IsOpen )
+
+            Trace.WriteLine( "Start Blinking" );
+            if ( isBlinking0 )
+                return;
+
+            isBlinking0 = true;
+            blinkTimer0 = new System.Timers.Timer( 500 ); // Set the interval to 500ms
+            blinkTimer0.Elapsed += OnBlinkTimerElapsed;
+            blinkTimer0.Start();
+
+            StartBlinkingConnected1();
+        }
+        private void StartBlinkingConnected1 ()
+        {
+            Trace.WriteLine( "Start Blinking 1" );
+            if ( isBlinking1 )
+                return;
+
+            isBlinking1 = true;
+            blinkTimer1 = new System.Timers.Timer( 500 ); // Set the interval to 500ms
+            blinkTimer1.Elapsed += OnBlinkTimerElapsed1;
+            blinkTimer1.Start();
+            StartBlinkingConnected2();
+        }
+        private void StartBlinkingConnected2 ()
+        {
+            Trace.WriteLine( "Start Blinking 2" );
+            if ( isBlinking2 )
+                return;
+
+            isBlinking2 = true;
+            blinkTimer2 = new System.Timers.Timer( 500 ); // Set the interval to 500ms
+            blinkTimer2.Elapsed += OnBlinkTimerElapsed2;
+            blinkTimer2.Start();
+        }
+
+        private void OnBlinkTimerElapsed ( object sender, ElapsedEventArgs e )
+        {
+            if ( CanvasBackground0 == Brushes.WhiteSmoke )
             {
-                sp.WriteLine( data );
+                CanvasBackground0 = Brushes.Green; // Change to Green
+            }
+            else
+            {
+                CanvasBackground0 = Brushes.WhiteSmoke; // Change back to ForestGreen
+            }
+        }
+        private void OnBlinkTimerElapsed1 ( object sender, ElapsedEventArgs e )
+        {
+            if ( CanvasBackground1 == Brushes.WhiteSmoke )
+            {
+                CanvasBackground1 = Brushes.Green; // Change to Green
+            }
+            else
+            {
+                CanvasBackground1 = Brushes.WhiteSmoke; // Change back to ForestGreen
+            }
+        }
+        private void OnBlinkTimerElapsed2 ( object sender, ElapsedEventArgs e )
+        {
+            if ( CanvasBackground2 == Brushes.WhiteSmoke )
+            {
+                CanvasBackground2 = Brushes.Green; // Change to Green
+            }
+            else
+            {
+                CanvasBackground2 = Brushes.WhiteSmoke; // Change back to ForestGreen
             }
         }
 
-        /// <summary>
-        /// serialPort.DataReceived event has subscribed this in constructor
-        /// it waits until serialPort.ReadExisting().ToString() then
-        /// waits for ProcessReceivedDataAsync( hexData )
-        /// </summary>
-        /// <returns></returns>
-        private async Task OnDataReceivedAsync ()
+        private void SerialCommunicationSelected ()
         {
-            string hexData = await Task.Run( () => sp.ReadExisting().ToString() );
-            await ProcessReceivedDataAsync( hexData );
+            IsSerialPaneEnabled = true;
+            ComPortList = SerialPort.GetPortNames();
         }
 
         /// <summary>
-        /// This method is called by OnDataReceivedAsync with hexData and 
-        /// filters it by checking message starting from 
-        /// "0x02"(beggining of the mesagge) - "0x03"(ending of the message)
-        /// it will then assigns the resulted data to completeHexMessage 
-        /// finnaly DataReceived?.Invoke( completeHexMessage ) will notify
-        /// ServiceCommunicationViewModel
+        /// 
         /// </summary>
-        /// <param name="hexData"> data read from serial port in OnDataReceivedAsync </param>
-        /// /// <returns></returns>
-        private async Task ProcessReceivedDataAsync ( string hexData )
+        /// 
+        private void MessageReceived (MessageModel model)
         {
-            await Task.Run( () =>
+            Trace.WriteLine( $"+++++++++ Model Inıt" );
+            if ( !MessageList.Any( x => x.MessageDateTime == model.MessageDateTime ) )
             {
-                if ( hexData == "0x02" )
+                Trace.WriteLine( $"+++++++++ Success" );
+                App.Current.Dispatcher.Invoke( () => 
                 {
-                    isCommunicationActive = true;
-                    dataReceiverBuffer.Clear();
+                    ObservableCollection<MessageModel> temp = MessageList;
+                    temp.Add(model);
+                    MessageList = temp;
                 }
-
-                if ( isCommunicationActive && hexData != "0x02" && hexData != "0x03" )
-                {
-                    dataReceiverBuffer.Append( hexData );
-                }
-
-                if ( hexData == "0x03" && isCommunicationActive )
-                {
-                    isCommunicationActive = false;
-                    DataReceivedSerial = dataReceiverBuffer.ToString();
-                    //string convertedData = ConvertHexToString( completeHexMessage );
-                }
-            } );
-        }
-
-        /// <summary>
-        ///  TO-DO : When physical tests begin check the form of received data
-        ///  Dont Forget to uncomment "//string convertedData = ConvertHexToString( completeHexMessage );" in ProcessReceivedDataAsync
-        /// </summary>
-        /// <param name="hexData"></param>
-        /// <returns></returns>
-        private string ConvertHexToString ( string hexData )
-        {
-            try
-            {
-                byte [] bytes = new byte [hexData.Length / 2];
-                for ( int i = 0; i < hexData.Length; i += 2 )
-                {
-                    bytes [i / 2] = Convert.ToByte( hexData.Substring( i, 2 ), 16 );
-                }
-                return Encoding.UTF8.GetString( bytes );
+                );
+                Trace.WriteLine( $"+++++++++ Model Inıt {MessageList [0].MessageDateTime} // {MessageList [0].MessageToShow}" );
             }
-            catch ( Exception ex )
-            {
-                return $"Error converting hex to string: {ex.Message}";
-            }
+
         }
-        #endregion SerialPort
+        #endregion Methods.UI
+
         #endregion Methods
 
+        public void DataReceived_PropertyChanged ( object sender, PropertyChangedEventArgs e )
+        {
+            Trace.WriteLine($"++++++++++++++++++++++ Property Changed on ViewModel : {e.PropertyName}");
+            if ( e.PropertyName == "SerialDataReceived" )
+            {
+                Trace.WriteLine( $"+++++++++ Data will be assigned on ViewModel : {SerialDataReceived}" );
+                this.SerialDataReceived = scModel.SerialDataReceived;
+                Trace.WriteLine( $"+++++++++ Data has assigned on ViewModel : {SerialDataReceived}" );
+                MessageModel model = new MessageModel();
+                model.MessageDateTime = DateTime.Now;
+                model.MessageToShow = SerialDataReceived;
+                Trace.WriteLine( $"+++++++++ Model has created on ViewModel : {model.MessageDateTime} // {model.MessageToShow}" );
+                MessageReceived( model );
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged ( string propertyName )
+        {
+            PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
+        }
     }
 }
