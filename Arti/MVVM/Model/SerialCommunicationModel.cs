@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Arti.MVVM.Model
 {
     public class SerialCommunicationModel : INotifyPropertyChanged 
     {
-        
+        private static readonly Regex sWhitespace = new Regex( @"\s+" );
         #region privateVariables
         /// <summary>
         /// Declaring variables needed to create a serial connection
@@ -170,8 +172,9 @@ namespace Arti.MVVM.Model
         /// <returns></returns>
         private async Task OnDataReceivedAsync ()
         {
-            Trace.WriteLine(">>>>>>>>>>>>>>>>>DATA RECEIVED");
-            string hexData = await Task.Run( () => selectedSerialPort.ReadExisting().ToString() );
+            Trace.WriteLine( ">>>>>>>>>>>>>>>>>DATA RECEIVED" );
+            int hexData = await Task.Run( () => selectedSerialPort.ReadByte() );
+            //string hexData = await Task.Run( () => selectedSerialPort.ReadExisting().ToString() );
             await ProcessReceivedDataAsync( hexData );
         }
 
@@ -185,31 +188,31 @@ namespace Arti.MVVM.Model
         /// </summary>
         /// <param name="hexData"> data read from serial port in OnDataReceivedAsync </param>
         /// /// <returns></returns>
-        private async Task ProcessReceivedDataAsync ( string hexData )
+        private async Task ProcessReceivedDataAsync ( int hexData )
         {
             await Task.Run( () =>
             {
-                if ( hexData == "0x02" )
-                {
-                    Trace.WriteLine( ">>>>>>>>>>>>>>>>>Start Reading" );
-                    isCommunicationActive = true;
-                    dataReceiverBuffer.Clear();
-                }
-
-                if ( isCommunicationActive && hexData != "0x02" && hexData != "0x03" )
+                int id = selectedSerialPort.ReadByte();
+                int msgCode = selectedSerialPort.ReadByte();
+                int dataLengthLocal = selectedSerialPort.ReadByte()*10;
+                dataLengthLocal += selectedSerialPort.ReadByte();
+                int checkSum;
+                dataReceiverBuffer.Clear();
+                for ( int i = 0; i <= dataLengthLocal; i++)
                 {
                     Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating message" );
-                    dataReceiverBuffer.Append( hexData );
-                }
-
-                if ( hexData == "0x03" && isCommunicationActive )
-                {
-                    isCommunicationActive = false;
+                    dataReceiverBuffer.Append( " " + selectedSerialPort.ReadByte().ToString() );
                     SerialDataReceived = dataReceiverBuffer.ToString();
                     Trace.WriteLine( ">>>>>>>>>>>>>>>>>Message Created" );
                     Trace.WriteLine( $"Message Created {SerialDataReceived}" );
-                    Trace.WriteLine( ">>>>>>>>>>>>>>>>>End of Cycle" );
-                    isCommunicationActive = false;
+                }
+                checkSum = selectedSerialPort.ReadByte();
+                checkSum += selectedSerialPort.ReadByte();
+                Trace.WriteLine( $"Card ID: {id} | Message Code: {msgCode} | Length: {dataLengthLocal} | Check Sum Received: {checkSum}" );
+                Trace.WriteLine( ">>>>>>>>>>>>>>>>>End of Cycle" );
+                if ( selectedSerialPort.ReadByte() != 3 )
+                {
+                    Trace.WriteLine("Where is my closing line");
                 }
             } );
         }
@@ -235,6 +238,18 @@ namespace Arti.MVVM.Model
             {
                 return $"Error converting hex to string: {ex.Message}";
             }
+        }
+
+
+        /// <summary>
+        /// To change Incoming data
+        /// Incoming data 
+        /// 1 byte stx(0x02) - 1byte ID - 1byte messagecode - 2byte dataLength - dataLength byte data - checksum - 0x03
+        /// </summary>
+        ///
+        private void ChangeMessageType (string msg)
+        {
+
         }
         #endregion
 

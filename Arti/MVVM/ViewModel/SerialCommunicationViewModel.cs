@@ -23,6 +23,10 @@ namespace Arti.MVVM.ViewModel
     partial class SerialCommunicationViewModel : INotifyPropertyChanged
     {
 
+        #region To test easily
+
+        #endregion
+
         #region Variables
 
         #region Variables.SerialCommunication
@@ -30,9 +34,9 @@ namespace Arti.MVVM.ViewModel
         /// Serialport to be opened thruough user selections will have these variables
         /// 0 = deviceId (string) 
         /// 1 = portName (string)
-        /// 2 = baudRateIndex     | 5 = handShakeIndex  (int)
-        /// 3 = parityListIndex   | 6 = ReadTimeOut     (int)
-        /// 4 = stopBitIndex      | 7 = WriteTimeOut    (int)
+        /// 2 = BaudRate          | 5 = HandShake       (int)
+        /// 3 = Parity            | 6 = ReadTimeOut     (int)
+        /// 4 = StopBit           | 7 = WriteTimeOut    (int)
         /// </summary>
         private ObservableCollection<object> serialPortToBeOpenedDetails;
         public ObservableCollection<object> SerialPortToBeOpenedDetails
@@ -59,7 +63,6 @@ namespace Arti.MVVM.ViewModel
         }
 
         private string serialDataReceived;
-
         public string SerialDataReceived
         {
             get => serialDataReceived;
@@ -202,6 +205,111 @@ namespace Arti.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// Card channel controllers green for communication red for not communication
+        /// Brush Picker 0 - not communicating , 1 - communicating, 2- not connected
+        /// </summary>
+        private Brush [] buttonStateBrushList = { Brushes.DarkRed, Brushes.LimeGreen, Brushes.Transparent };
+        private ObservableCollection<Brush> buttonStates0;
+        public ObservableCollection<Brush> ButtonStates0
+        {
+            get => buttonStates0;
+            set => buttonStates0 = value;
+        }
+        private ObservableCollection<Brush> buttonStates1;
+        public ObservableCollection<Brush> ButtonStates1
+        {
+            get => buttonStates1;
+            set => buttonStates1 = value;
+        }
+        private ObservableCollection<Brush> buttonStates2;
+        public ObservableCollection<Brush> ButtonStates2
+        {
+            get => buttonStates2;
+            set => buttonStates2 = value;
+        }
+        /// <summary>
+        /// For handling 2 errors for each channel
+        /// </summary>
+        private Brush [] errorStateBrushList = { Brushes.Red, Brushes.SpringGreen, Brushes.Transparent };
+        // For card0 err0
+        private ObservableCollection<Brush> errorStatusList0;
+        public ObservableCollection<Brush> ErrorStatusList0
+        {
+            get
+            {
+                return errorStatusList0;
+            }
+            set
+            {
+                errorStatusList0 = value;
+            }
+        }
+        // For card0 err1
+        private ObservableCollection<Brush> errorStatusList01;
+        public ObservableCollection<Brush> ErrorStatusList01
+        {
+            get
+            {
+                return errorStatusList01;
+            }
+            set
+            {
+                errorStatusList01 = value;
+            }
+        }
+        // For card1 err0
+        private ObservableCollection<Brush> errorStatusList1;
+        public ObservableCollection<Brush> ErrorStatusList1
+        {
+            get
+            {
+                return errorStatusList1;
+            }
+            set
+            {
+                errorStatusList1 = value;
+            }
+        }
+        // For card1 err1
+        private ObservableCollection<Brush> errorStatusList11;
+        public ObservableCollection<Brush> ErrorStatusList11
+        {
+            get
+            {
+                return errorStatusList11;
+            }
+            set
+            {
+                errorStatusList11 = value;
+            }
+        }
+        // For card2 err0
+        private ObservableCollection<Brush> errorStatusList2;
+        public ObservableCollection<Brush> ErrorStatusList2
+        {
+            get
+            {
+                return errorStatusList2;
+            }
+            set
+            {
+                errorStatusList2 = value;
+            }
+        }
+        // For card2 err1
+        private ObservableCollection<Brush> errorStatusList21;
+        public ObservableCollection<Brush> ErrorStatusList21
+        {
+            get
+            {
+                return errorStatusList21;
+            }
+            set
+            {
+                errorStatusList21 = value;
+            }
+        }
         #endregion Variables.View
 
         #region Variables.Commands
@@ -225,7 +333,19 @@ namespace Arti.MVVM.ViewModel
         #region Constructors
         public SerialCommunicationViewModel ()
         {
+            errorStatusList0 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusList1 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusList2 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusList01 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusList11 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusList21 = new ObservableCollection<Brush>( new Brush [8] );
+            PaintError0Brushes();
+            PaintError1Brushes();
             Trace.WriteLine( "ViewModelConstructor" );
+            buttonStates0 = new ObservableCollection<Brush>( new Brush [8] );
+            buttonStates1 = new ObservableCollection<Brush>( new Brush [8] );
+            buttonStates2 = new ObservableCollection<Brush>( new Brush [8] );
+            PaintButtonBrushes();
             IsSerialPaneEnabled = false;
             CanvasBackground0 = Brushes.DarkGray;
             CanvasBackground1 = Brushes.DarkGray;
@@ -235,7 +355,6 @@ namespace Arti.MVVM.ViewModel
             SerialCommunicationSelectedCommand = new RelayCommand(SerialCommunicationSelected);
             OpenSerialPortCommand = new RelayCommand(OpenSerialPortConnection);
             StartBlinkingCommand = new RelayCommand(StartBlinkingConnected);
-            StartBlinkingConnected();
         }
 
         #endregion Constructors
@@ -267,6 +386,34 @@ namespace Arti.MVVM.ViewModel
         #endregion Methods.SerialPort
 
         #region Methods.UI
+
+        private void PaintButtonBrushes ()
+        {
+            for ( int i = 0; i < 8; i++ )
+            {
+                buttonStates0 [i] = buttonStateBrushList [0];
+                buttonStates1 [i] = buttonStateBrushList [0];
+                buttonStates2 [i] = buttonStateBrushList [1];
+            }
+        }
+        private void PaintError0Brushes ()
+        {
+            for ( int i = 0; i < 8; i++ )
+            {
+                errorStatusList0 [i] = errorStateBrushList [0];
+                errorStatusList1 [i] = errorStateBrushList [0];
+                errorStatusList2 [i] = errorStateBrushList [1];
+            }
+        }
+        private void PaintError1Brushes ()
+        {
+            for ( int i = 0; i < 8; i++ )
+            {
+                errorStatusList01 [i] = errorStateBrushList [1];
+                errorStatusList11 [i] = errorStateBrushList [0];
+                errorStatusList21 [i] = errorStateBrushList [1];
+            }
+        }
 
         /// <summary>
         /// To mimic blinking effect around device UI when connected
@@ -387,6 +534,67 @@ namespace Arti.MVVM.ViewModel
                 model.MessageToShow = SerialDataReceived;
                 Trace.WriteLine( $"+++++++++ Model has created on ViewModel : {model.MessageDateTime} // {model.MessageToShow}" );
                 MessageReceived( model );
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates(model.MessageDateTime, model.MessageToShow));
+            }
+        }
+
+        public void CheckForUIUpdates (DateTime dataTime, string data)
+        {
+            Trace.WriteLine("Error Code solving");
+            if ( data == "hata000"  && dataTime != DateTime.Now)
+            {
+                errorStatusList0 [0] = errorStateBrushList[0];
+                errorStatusList01 [0] = errorStateBrushList [0];
+            }
+            else if ( data == "hata001" )
+            {
+                errorStatusList0 [0] = errorStateBrushList [0];
+                errorStatusList01 [0] = errorStateBrushList [1];
+            }
+            else if ( data == "hata010" )
+            {
+                errorStatusList0 [0] = errorStateBrushList [1];
+                errorStatusList01 [0] = errorStateBrushList [0];
+            }
+            else if ( data == "hata011" )
+            {
+                errorStatusList0 [0] = errorStateBrushList [1];
+                errorStatusList01 [0] = errorStateBrushList [1];
+            }
+            else if ( data == "hata100" )
+            {
+                errorStatusList0 [1] = errorStateBrushList [0];
+                errorStatusList01 [1] = errorStateBrushList [0];
+            }
+            else if ( data == "hata101" )
+            {
+                errorStatusList0 [1] = errorStateBrushList [0];
+                errorStatusList01 [1] = errorStateBrushList [1];
+            }
+            else if ( data == "hata110" )
+            {
+                errorStatusList0 [1] = errorStateBrushList [1];
+                errorStatusList01 [1] = errorStateBrushList [0];
+            }
+            else if ( data == "hata111" )
+            {
+                errorStatusList0 [1] = errorStateBrushList [1];
+                errorStatusList01 [1] = errorStateBrushList [1];
+            }
+            else if ( data == "hata200" )
+            {
+                errorStatusList0 [2] = errorStateBrushList [0];
+                errorStatusList01 [2] = errorStateBrushList [0];
+            }
+            else if ( data == "hata201" )
+            {
+                errorStatusList0 [2] = errorStateBrushList [0];
+                errorStatusList01 [2] = errorStateBrushList [1];
+            }
+            else if ( data == "hata210" )
+            {
+                errorStatusList0 [2] = errorStateBrushList [1];
+                errorStatusList01 [2] = errorStateBrushList [0];
             }
         }
 
