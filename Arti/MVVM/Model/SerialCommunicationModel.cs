@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.AccessControl;
 using System.Text;
@@ -19,11 +21,34 @@ namespace Arti.MVVM.Model
     public class SerialCommunicationModel : INotifyPropertyChanged 
     {
 
+        Queue<Stream> readStreams = new Queue<Stream>();
+        Stream readStream;
+
+        private int card1ChannelCount;
+
+        public int Card1ChannelCount
+        {
+            get
+            {
+                return card1ChannelCount;
+            }
+            set
+            {
+                if ( card1ChannelCount != value )
+                {
+                    card1ChannelCount = value;
+                    OnPropertyChanged(nameof( Card1ChannelCount ) );
+                }
+            }
+        }
+
+
+        //ManualResetEvent readComplete = new ManualResetEvent( false );
         #region Properties
         /// <summary>
         /// Declaring variables needed to create a serial connection
         /// </summary>
-        private System.Timers.Timer errorInspectorTimer;
+        private System.Timers.Timer errorInspectorTimer; // To send error checks periodically
         private System.Timers.Timer card1InspectorTimer;
         private System.Timers.Timer card2InspectorTimer;
         private System.Timers.Timer card3InspectorTimer;
@@ -127,6 +152,7 @@ namespace Arti.MVVM.Model
             Handshake handShakeC, int readTimeOut, int writeTimeOut
             )
         {
+            Card1ChannelCount = 0;
             selectedBaudRate = baudRate;
             selectedSerialPort = new SerialPort( portName, selectedBaudRate );
             deviceID = deviceIDO;
@@ -171,6 +197,35 @@ namespace Arti.MVVM.Model
             }
         }
 
+        private async Task WhatToDoWithData (byte msgCode,byte [] dataToBeChecked)
+        {
+            if ( msgCode == 0xCA ) // Channel info response 6Byte each cards channel will be sent as 2 bytes
+            {
+                Card1ChannelCount = CalculateDataLength( dataToBeChecked [0], dataToBeChecked [1] );
+            }
+            else if ( msgCode == 0xCB ) // Error inspection response for each card  bit0(short circuit),bit1 (over current), bit2(voltage error), bit3-7 reserved => byte0-15 card1, 16-31 card2, 31-47 card3 
+            {
+
+            }
+            else if ( msgCode == 0xCE ) // Card 1 is open/closed 2Byte lsb 1open 0 closed
+            {
+
+            }
+            else if ( msgCode == 0xCF ) // Card 2 is open/closed 2Byte lsb 1open 0 closed
+            {
+
+            }
+            else if ( msgCode == 0xD0 ) // Card 3 is open/closed 2Byte lsb 1open 0 closed
+            {
+
+            }
+            else
+            {
+                SerialDataReceived = "UNEXPECTED RESPONSE";
+            }
+
+        }
+
         /// <summary>
         /// serialPort.DataReceived event has subscribed this in constructor
         /// it waits until serialPort.ReadExisting().ToString() then
@@ -179,100 +234,61 @@ namespace Arti.MVVM.Model
         /// <returns></returns>
         private async Task OnDataReceivedAsync ()
         {
-            Trace.WriteLine( ">>>>>>>>>>>>>>>>>DATA RECEIVED" );
-            int hexData = await Task.Run( () => selectedSerialPort.ReadByte() );
-            //string hexData = await Task.Run( () => selectedSerialPort.ReadExisting().ToString() );
-            Trace.WriteLine( ">>>>>>>>>>>>>>>>>Enter : " + hexData );
-            await ProcessReceivedDataAsync( hexData );
+            // Look BaseStream.ReadBytes() vs SerialPort.ReadBytes()
+            readStream = new MemoryStream();
+            readStream = selectedSerialPort.BaseStream;
+            readStreams.Enqueue(readStream);
+            await SplitDataIntoMeanings();
         }
-
         /// <summary>
-        /// This method is called by OnDataReceivedAsync with hexData and 
-        /// filters it by checking message starting from 
-        /// "0x02"(beggining of the mesagge) - "0x03"(ending of the message)
-        /// it will then assigns the resulted data to completeHexMessage 
-        /// finnaly DataReceived?.Invoke( completeHexMessage ) will notify
-        /// ServiceCommunicationViewModel
+        /// Decodes the received msg into meaningfull parts
         /// </summary>
-        /// <param name="hexData"> data read from serial port in OnDataReceivedAsync </param>
-        /// /// <returns></returns>
-        private async Task ProcessReceivedDataAsync ( int hexData )
-        {
-
-            int id = selectedSerialPort.ReadByte();
-            Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating id " + id );
-            int msgCode = selectedSerialPort.ReadByte();
-            Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating msgCode " + msgCode );
-            int dataLengthLocal = selectedSerialPort.ReadByte();
-            int tempData = selectedSerialPort.ReadByte();
-            if ( 48 <= dataLengthLocal && dataLengthLocal <= 57 ) // between 0-9
-            {
-                dataLengthLocal = ( dataLengthLocal - 48 ) * 16;
-                Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating dataLengthLocal " + dataLengthLocal );
-            }
-            else if ( 65 <= dataLengthLocal && dataLengthLocal <= 70 ) // between A-F
-            {
-                dataLengthLocal = ( dataLengthLocal - 55 ) * 16;
-                Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating dataLengthLocal " + dataLengthLocal );
-            }
-            if ( 48 <= tempData && tempData <= 57 ) // between 0-9
-            {
-                tempData = ( tempData - 48 );
-                Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating tempData " + tempData );
-            }
-            else if ( 65 <= tempData && tempData <= 70 ) // between A-F
-            {
-                tempData = ( tempData - 55 );
-                Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating tempData " + tempData );
-            }
-            dataLengthLocal += tempData;
-            Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating Final DataLength " + dataLengthLocal );
-            int checkSum;
-            dataReceiverBuffer.Clear();
-            for ( int i = 0; i < dataLengthLocal; i++ )
-            {
-                Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating message" );
-                dataReceiverBuffer.Append( " " + selectedSerialPort.ReadByte().ToString() );
-                Trace.WriteLine( ">>>>>>>>>>>>>>>>>Creating message : " + dataReceiverBuffer.ToString() );
-            }
-            SerialDataReceived = dataReceiverBuffer.ToString();
-            Trace.WriteLine( ">>>>>>>>>>>>>>>>>Message Created" );
-            Trace.WriteLine( $"Message Created {SerialDataReceived}" );
-            checkSum = selectedSerialPort.ReadByte();
-            //checkSum += selectedSerialPort.ReadByte();
-            Trace.WriteLine( $"Card ID: {id} | Message Code: {msgCode} | Length: {dataLengthLocal} | Check Sum Received: {checkSum}" );
-            Trace.WriteLine( ">>>>>>>>>>>>>>>>>End of Cycle" );
-            if ( selectedSerialPort.ReadByte() != 3 )
-            {
-                Trace.WriteLine( "Where is my closing line" );
-            }
-            selectedSerialPort.DiscardInBuffer();
-            SendChannelInspection();
-        }
-
-        /// <summary>
-        ///  TO-DO : When physical tests begin check the form of received data
-        ///  Dont Forget to uncomment "//string convertedData = ConvertHexToString( completeHexMessage );" in ProcessReceivedDataAsync
-        /// </summary>
-        /// <param name="hexData"></param>
         /// <returns></returns>
-        private string ConvertHexToString ( string hexData )
+        private async Task SplitDataIntoMeanings ()
         {
-            try
+            Stream current = readStreams.Dequeue();
+            byte stx = 0x02;
+            byte etx = 0x03;
+            byte msgID;
+            byte msgCode;
+            byte dataLengthMSB;
+            byte dataLengthLSB;
+            int dataLength;
+            byte [] data;
+            byte checkSumMSB;
+            byte checkSumLSB;
+            byte [] checkSum;
+            if ( (byte)current.ReadByte() == stx )
             {
-                byte [] bytes = new byte [hexData.Length / 2];
-                for ( int i = 0; i < hexData.Length; i += 2 )
+                msgID = (byte)current.ReadByte();
+                msgCode = (byte)current.ReadByte();
+                dataLengthMSB = (byte)current.ReadByte();
+                dataLengthLSB = (byte)current.ReadByte();
+                dataLength = CalculateDataLength(dataLengthMSB, dataLengthLSB);
+                data = new byte [dataLength];
+                for ( int i = 0; i < dataLength; i++ )
                 {
-                    bytes [i / 2] = Convert.ToByte( hexData.Substring( i, 2 ), 16 );
+                    data [i] = (byte)current.ReadByte();
                 }
-                return Encoding.UTF8.GetString( bytes );
+                await WhatToDoWithData(msgCode,data);
+                checkSumMSB = (byte)current.ReadByte();
+                checkSumLSB = (byte)current.ReadByte();
+                if ( (byte)current.ReadByte() == etx )
+                {
+                    SerialDataReceived = CreateMessage( msgID, msgCode, data, checkSumMSB, checkSumLSB );
+                }
+                else
+                {
+                    Trace.WriteLine("Etx not received");
+                    current.Flush();
+                }
             }
-            catch ( Exception ex )
+            else
             {
-                return $"Error converting hex to string: {ex.Message}";
+                Trace.WriteLine("Stx not received");
+                current.Flush();
             }
         }
-
 
         /// <summary>
         /// To change Incoming data
@@ -289,117 +305,20 @@ namespace Arti.MVVM.Model
         {
             if ( selectedSerialPort.IsOpen )
             {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xC9, 0x30, 0x30, 0x00, 0xF0, 0x03 }, 0, 8 );
-
-            }
-        }
-        // Card1 channel open
-        private void SendOpenCommandTo1 (int channelNumber)
-        {
-            if ( channelNumber == 1 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0xFE, 0x01, 0x14, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 2 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0xFD, 0x02, 0x14, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 3 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0xFB, 0x04, 0x14, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 4 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0xF7, 0x08, 0x14, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 5 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0xEF, 0x10, 0x14, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 6 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0xDF, 0x20, 0x14, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 7 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0xBF, 0x40, 0x14, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 8 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD4, 0x30, 0x34, 0x7F, 0x80, 0x14, 0x03 }, 0, 8 );
-            }
-        }
-        // Card2 channel open
-        private void SendOpenCommandTo2 ( int channelNumber )
-        {
-            if ( channelNumber == 1 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0xFE, 0x01, 0x15, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 2 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0xFD, 0x02, 0x15, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 3 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0xFB, 0x04, 0x15, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 4 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0xF7, 0x08, 0x15, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 5 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0xEF, 0x10, 0x15, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 6 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0xDF, 0x20, 0x15, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 7 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0xBF, 0x40, 0x15, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 8 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD5, 0x30, 0x34, 0x7F, 0x80, 0x15, 0x03 }, 0, 8 );
+                selectedSerialPort.BaseStream.Write( new byte [] { 0x02, 0x39, 0xC9, 0x30, 0x30, 0x46, 0x30, 0x03 }, 0, 8 );
             }
         }
 
-        private void SendOpenCommandTo3 ( int channelNumber )
+        public void SendChannelOpenRequest (int cardIndex, int channelIndex)
         {
-            if ( channelNumber == 1 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0xFE, 0x01, 0x16, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 2 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0xFD, 0x02, 0x16, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 3 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0xFB, 0x04, 0x16, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 4 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0xF7, 0x08, 0x16, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 5 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0xEF, 0x10, 0x16, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 6 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0xDF, 0x20, 0x16, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 7 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0xBF, 0x40, 0x16, 0x03 }, 0, 8 );
-            }
-            else if ( channelNumber == 8 && selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD6, 0x30, 0x34, 0x7F, 0x80, 0x16, 0x03 }, 0, 8 );
-            }
+            byte [] dataToBeSent = CalculateOpenCommandToBeSent(cardIndex, channelIndex);
+            selectedSerialPort.BaseStream.Write(dataToBeSent);
+        }
+
+        public void SendChannelCloseRequest ( int cardIndex, int channelIndex )
+        {
+            byte [] dataToBeSent = CalculateCloseCommandToBeSent( cardIndex, channelIndex );
+            selectedSerialPort.BaseStream.Write( dataToBeSent );
         }
 
         private void SendCardErrorInspection ()
@@ -468,6 +387,420 @@ namespace Arti.MVVM.Model
         {
             SendCard3OpenOrClosed();
         }
+
+        #region DataManupulation
+
+        private string CreateMessage (byte id, byte msgCode, byte [] dataReceived, byte checkSumMsb, byte checkSumLsb)
+        {
+            string result = "";
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(ByteToString( id ) );
+            stringBuilder.Append( ByteToString( msgCode ) );
+            for ( int i = 0; i < dataReceived.Length; i++ )
+            {
+                stringBuilder.Append( ByteToString( dataReceived [i] ));
+            }
+            stringBuilder.Append(ByteToString(checkSumMsb));
+            stringBuilder.Append(ByteToString(checkSumLsb));
+            result = stringBuilder.ToString();
+            return result;
+        }
+        /// <summary>
+        /// takes byte as input and converts it to 0x00 format
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        private string ByteToString ( byte x )
+        {
+            return x.ToString( "X2" );
+        }
+        /// <summary>
+        /// Splits given byte to two bytes
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        byte [] SplitByteToTwo ( byte x )
+        {
+            return Encoding.ASCII.GetBytes( ByteToString( x ) );
+        }
+        /// <summary>
+        /// takes byte string as input and converts it to integer value
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        private int StringToInt ( string x )
+        {
+            return int.Parse( x, System.Globalization.NumberStyles.HexNumber );
+        }
+        /// <summary>
+        /// calculates the data length with msb and lsb
+        /// </summary>
+        /// <param name="lengthMSB"></param>
+        /// <param name="lengthLSB"></param>
+        /// <returns></returns>
+        private int CalculateDataLength (byte lengthMSB, byte lengthLSB)
+        {
+            int result = -1;
+            // Calculates msb
+            byte x = (byte)StringToInt( ByteToString(lengthMSB) );
+            if ( 48 <= x && x <= 57 )
+            {
+                result = ( x - 48 ) * 16;
+            }
+            else if ( 65 <= x && x <= 70 )
+            {
+                result = ( x - 55 ) * 16;
+            }
+            else
+            {
+                result = x;
+            }
+            // Calculates lsb
+            byte x2 = (byte)StringToInt( ByteToString(lengthLSB) );
+            if ( 48 <= x2 && x2 <= 57 )
+            {
+                result += ( x2 - 48 );
+            }
+            else if ( 65 <= x2 && x2 <= 70 )
+            {
+                result += ( x2 - 55 );
+            }
+            else
+            {
+                result += x2;
+            }
+            return result;
+        }
+        /// <summary>
+        /// Calculates the checkSum of given array of bytes 
+        /// </summary>
+        /// <param name="checkSumToBeCalculated"></param>
+        /// <returns> [0] as msb [1] as lsb </returns>
+        private byte [] CalculateCheckSum ( byte [] checkSumToBeCalculated)
+        {
+            byte tempResult = 0x00;
+            foreach ( byte x in checkSumToBeCalculated )
+            {
+                tempResult ^= x;
+            }
+            return SplitByteToTwo( tempResult );
+        }
+        /// <summary>
+        /// Takes Card index and channel index as input then calculates the byte array to be sent
+        /// </summary>
+        /// <param name="cardIndex"></param>
+        /// <param name="channelIndex"></param>
+        /// <returns> return checksum as byte[] = { msb[0], lsb[1]} </returns>
+        private byte [] CalculateOpenCommandToBeSent ( int cardIndex, int channelIndex )
+        {
+            byte toBegin = 0b00000001;
+            byte [] result = new byte [12]; // to be returned
+            byte [] checkSumCalc = new byte [9]; // to calculate checksum
+            byte [] checkSumTemp = new byte [2]; // to send checksum Method
+                                                 // Generic properties
+            byte stx = 0x02;
+            byte etx = 0x03;
+            byte id = 0x39;
+            byte msgCode = 0x00;
+            // Data part
+            byte dataLengthMSB = 0x30;
+            byte dataLengthLSB = 0x34;
+            byte dataByte1MSB = 0xFF;
+            byte dataByte1LSB = 0x00;
+            byte dataByte0MSB = 0xFF;
+            byte dataByte0LSB = 0x00;
+            // Check sum
+            byte checkSumMSB;
+            byte checkSumLSB;
+
+            if ( cardIndex == 0 )
+            {
+                msgCode = 0xD4;
+            }
+            else if ( cardIndex == 1 )
+            {
+                msgCode = 0xD5;
+            }
+            else if ( cardIndex == 2 )
+            {
+                msgCode = 0xD6;
+            }
+
+            if ( channelIndex == 1 )
+            {
+                byte temp1 = toBegin;
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 2 )
+            {
+                byte temp1 = (byte)( toBegin << 1 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 3 )
+            {
+                byte temp1 = (byte)( toBegin << 2 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 4 )
+            {
+                byte temp1 = (byte)( toBegin << 3 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 5 )
+            {
+                byte temp1 = (byte)( toBegin << 4 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 6 )
+            {
+                byte temp1 = (byte)( toBegin << 5 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 7 )
+            {
+                byte temp1 = (byte)( toBegin << 6 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 8 )
+            {
+                byte temp1 = (byte)( toBegin << 7 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+
+            checkSumCalc [0] = stx;
+            checkSumCalc [1] = id;
+            checkSumCalc [2] = msgCode;
+            checkSumCalc [3] = dataLengthMSB;
+            checkSumCalc [4] = dataLengthLSB;
+            checkSumCalc [5] = dataByte1MSB;
+            checkSumCalc [6] = dataByte1LSB;
+            checkSumCalc [7] = dataByte0MSB;
+            checkSumCalc [8] = dataByte0LSB;
+            checkSumTemp = CalculateCheckSum( checkSumCalc );
+            checkSumMSB = checkSumTemp [0];
+            checkSumLSB = checkSumTemp [1];
+
+            result [0] = stx;
+            result [1] = id;
+            result [2] = msgCode;
+            result [3] = dataLengthMSB;
+            result [4] = dataLengthLSB;
+            result [5] = dataByte1MSB;
+            result [6] = dataByte1LSB;
+            result [7] = dataByte0MSB;
+            result [8] = dataByte0LSB;
+            result [9] = checkSumMSB;
+            result [10] = checkSumLSB;
+            result [11] = etx;
+            return result;
+        }
+        /// <summary>
+        /// Takes Card index and channel index as input then calculates the byte array to be sent
+        /// </summary>
+        /// <param name="cardIndex"></param>
+        /// <param name="channelIndex"></param>
+        /// <returns> return checksum as byte[] = { msb[0], lsb[1]} </returns>
+        private byte [] CalculateCloseCommandToBeSent (int cardIndex, int channelIndex)
+        {
+            byte toBegin = 0b00000001;
+            byte [] result = new byte [12]; // to be returned
+            byte [] checkSumCalc = new byte [9]; // to calculate checksum
+            byte [] checkSumTemp = new byte [2]; // to send checksum Method
+                                                 // Generic properties
+            byte stx = 0x02;
+            byte etx = 0x03;
+            byte id = 0x39;
+            byte msgCode = 0x00;
+            // Data part
+            byte dataLengthMSB = 0x30;
+            byte dataLengthLSB = 0x34;
+            byte dataByte1MSB = 0xFF;
+            byte dataByte1LSB = 0x00;
+            byte dataByte0MSB = 0xFF;
+            byte dataByte0LSB = 0x00;
+            // Check sum
+            byte checkSumMSB;
+            byte checkSumLSB;
+
+            if ( cardIndex == 0 )
+            {
+                msgCode = 0xD7;
+            }
+            else if ( cardIndex == 1 )
+            {
+                msgCode = 0xD8;
+            }
+            else if ( cardIndex == 2 )
+            {
+                msgCode = 0xD9;
+            }
+
+            if ( channelIndex == 1 )
+            {
+                byte temp1 = toBegin;
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 2 )
+            {
+                byte temp1 = (byte)( toBegin << 1 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 3 )
+            {
+                byte temp1 = (byte)( toBegin << 2 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 4 )
+            {
+                byte temp1 = (byte)( toBegin << 3 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 5 )
+            {
+                byte temp1 = (byte)( toBegin << 4 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 6 )
+            {
+                byte temp1 = (byte)( toBegin << 5 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 7 )
+            {
+                byte temp1 = (byte)( toBegin << 6 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+            else if ( channelIndex == 8 )
+            {
+                byte temp1 = (byte)( toBegin << 7 );
+                byte temp0 = (byte)( ~temp1 );
+                byte [] split1 = SplitByteToTwo( temp1 );
+                byte [] split0 = SplitByteToTwo( temp0 );
+                dataByte1MSB = split1 [0];
+                dataByte1LSB = split1 [1];
+                dataByte0MSB = split0 [0];
+                dataByte0LSB = split0 [1];
+            }
+
+            checkSumCalc [0] = stx;
+            checkSumCalc [1] = id;
+            checkSumCalc [2] = msgCode;
+            checkSumCalc [3] = dataLengthMSB;
+            checkSumCalc [4] = dataLengthLSB;
+            checkSumCalc [5] = dataByte1MSB;
+            checkSumCalc [6] = dataByte1LSB;
+            checkSumCalc [7] = dataByte0MSB;
+            checkSumCalc [8] = dataByte0LSB;
+            checkSumTemp = CalculateCheckSum( checkSumCalc );
+            checkSumMSB = checkSumTemp [0];
+            checkSumLSB = checkSumTemp [1];
+
+            result [0] = stx;
+            result [1] = id;
+            result [2] = msgCode;
+            result [3] = dataLengthMSB;
+            result [4] = dataLengthLSB;
+            result [5] = dataByte1MSB;
+            result [6] = dataByte1LSB;
+            result [7] = dataByte0MSB;
+            result [8] = dataByte0LSB;
+            result [9] = checkSumMSB;
+            result [10] = checkSumLSB;
+            result [11] = etx;
+            return result;
+        }
+        #endregion DataManupulation
+
 
         #endregion
 

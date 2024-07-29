@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -24,7 +25,23 @@ namespace Arti.MVVM.ViewModel
     {
 
         #region To test easily
+        private int card1ChannelCount;
 
+        public int Card1ChannelCount
+        {
+            get
+            {
+                return card1ChannelCount;
+            }
+            set
+            {
+                if ( card1ChannelCount != value )
+                {
+                    card1ChannelCount = value;
+                    OnPropertyChanged( nameof( Card1ChannelCount ) );
+                }
+            }
+        }
         #endregion
 
         #region Variables
@@ -189,6 +206,7 @@ namespace Arti.MVVM.ViewModel
         private bool isCard2Connected = false;
         private bool isSerialPanelEnabled;
 
+        public bool canOpenCardChannel = false;
         public bool IsSerialPaneEnabled
         {
             get
@@ -214,7 +232,14 @@ namespace Arti.MVVM.ViewModel
         public ObservableCollection<Brush> ButtonStates0
         {
             get => buttonStates0;
-            set => buttonStates0 = value;
+            set
+            {
+                if ( buttonStates0 != value )
+                {
+                    buttonStates0 = value;
+                    OnPropertyChanged( nameof( ButtonStates0 ) );
+                }
+            }
         }
         private ObservableCollection<Brush> buttonStates1;
         public ObservableCollection<Brush> ButtonStates1
@@ -325,6 +350,108 @@ namespace Arti.MVVM.ViewModel
         {
             get; set;
         }
+        #region Card1OpenChannel
+        public ICommand OpenCard1Channel1Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard1Channel2Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard1Channel3Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard1Channel4Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard1Channel5Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard1Channel6Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard1Channel7Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard1Channel8Command
+        {
+            get; set;
+        }
+        #endregion Card1OpenChannel
+        #region Card2OpenChannel
+        public ICommand OpenCard2Channel1Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard2Channel2Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard2Channel3Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard2Channel4Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard2Channel5Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard2Channel6Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard2Channel7Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard2Channel8Command
+        {
+            get; set;
+        }
+        #endregion Card2OpenChannel
+        #region Card3OpenChannel
+        public ICommand OpenCard3Channel1Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard3Channel2Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard3Channel3Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard3Channel4Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard3Channel5Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard3Channel6Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard3Channel7Command
+        {
+            get; set;
+        }
+        public ICommand OpenCard3Channel8Command
+        {
+            get; set;
+        }
+        #endregion Card1OpenChannel
         #endregion Variables.Commands
 
 
@@ -345,7 +472,14 @@ namespace Arti.MVVM.ViewModel
             buttonStates0 = new ObservableCollection<Brush>( new Brush [8] );
             buttonStates1 = new ObservableCollection<Brush>( new Brush [8] );
             buttonStates2 = new ObservableCollection<Brush>( new Brush [8] );
-            PaintButtonBrushes();
+            ButtonStates0 [0] = Brushes.DarkRed;
+            ButtonStates0 [1] = Brushes.DarkRed;
+            ButtonStates0 [2] = Brushes.DarkRed;
+            ButtonStates0 [3] = Brushes.DarkRed;
+            ButtonStates0 [4] = Brushes.DarkRed;
+            ButtonStates0 [5] = Brushes.DarkRed;
+            ButtonStates0 [6] = Brushes.DarkRed;
+            ButtonStates0 [7] = Brushes.DarkRed;
             IsSerialPaneEnabled = false;
             CanvasBackground0 = Brushes.DarkGray;
             CanvasBackground1 = Brushes.DarkGray;
@@ -355,8 +489,34 @@ namespace Arti.MVVM.ViewModel
             SerialCommunicationSelectedCommand = new RelayCommand(SerialCommunicationSelected);
             OpenSerialPortCommand = new RelayCommand(OpenSerialPortConnection);
             StartBlinkingCommand = new RelayCommand(StartBlinkingConnected);
+            // Card1 open channel
+            OpenCard1Channel1Command = new RelayCommand( OpenCard1Channel1 );
+            OpenCard1Channel2Command = new RelayCommand( OpenCard1Channel2 );
+            OpenCard1Channel3Command = new RelayCommand( OpenCard1Channel3 );
+            OpenCard1Channel4Command = new RelayCommand( OpenCard1Channel4 );
+            OpenCard1Channel5Command = new RelayCommand( OpenCard1Channel5 );
+            OpenCard1Channel6Command = new RelayCommand( OpenCard1Channel6 );
+            OpenCard1Channel7Command = new RelayCommand( OpenCard1Channel7 );
+            OpenCard1Channel8Command = new RelayCommand( OpenCard1Channel8 );
+            // Card2 open channel
+            OpenCard2Channel1Command = new RelayCommand( OpenCard2Channel1 );
+            OpenCard2Channel2Command = new RelayCommand( OpenCard2Channel2 );
+            OpenCard2Channel3Command = new RelayCommand( OpenCard2Channel3 );
+            OpenCard2Channel4Command = new RelayCommand( OpenCard2Channel4 );
+            OpenCard2Channel5Command = new RelayCommand( OpenCard2Channel5 );
+            OpenCard2Channel6Command = new RelayCommand( OpenCard2Channel6 );
+            OpenCard2Channel7Command = new RelayCommand( OpenCard2Channel7 );
+            OpenCard2Channel8Command = new RelayCommand( OpenCard2Channel8 );
+            // Card3 open channel
+            OpenCard3Channel1Command = new RelayCommand( OpenCard3Channel1 );
+            OpenCard3Channel2Command = new RelayCommand( OpenCard3Channel2 );
+            OpenCard3Channel3Command = new RelayCommand( OpenCard3Channel3 );
+            OpenCard3Channel4Command = new RelayCommand( OpenCard3Channel4 );
+            OpenCard3Channel5Command = new RelayCommand( OpenCard3Channel5 );
+            OpenCard3Channel6Command = new RelayCommand( OpenCard3Channel6 );
+            OpenCard3Channel7Command = new RelayCommand( OpenCard3Channel7 );
+            OpenCard3Channel8Command = new RelayCommand( OpenCard3Channel8 );
         }
-
         #endregion Constructors
 
 
@@ -380,12 +540,353 @@ namespace Arti.MVVM.ViewModel
                                                     tempReadTimeOUT,
                                                     tempWriteTimeOUT );
             scModel.PropertyChanged += new PropertyChangedEventHandler( DataReceived_PropertyChanged );
+            canOpenCardChannel = true;
         }
 
+        public void SendOpenCardChannel ()
+        {
+            if ( ButtonStates0 [0] == Brushes.DarkRed )
+                ButtonStates0 [0] = Brushes.LimeGreen;
+            else
+                ButtonStates0 [0] = Brushes.DarkRed;
+        }
 
+        #region OpenCardChannel
+        private void OpenCard1Channel1 ()
+        {
+            if ( ButtonStates0 [0] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 1 );
+                ButtonStates0 [0] = buttonStateBrushList [1];
+            }
+            else if ( ButtonStates0 [0] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 1 );
+                ButtonStates0 [0] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard1Channel2 ()
+        {
+            if ( ButtonStates0 [1] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 2 );
+                ButtonStates0 [1] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates0 [1] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 2 );
+                ButtonStates0 [1] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard1Channel3 ()
+        {
+            if ( ButtonStates0 [2] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 3 );
+                ButtonStates0 [2] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates0 [2] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 3 );
+                ButtonStates0 [2] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard1Channel4 ()
+        {
+            if ( ButtonStates0 [3] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 4 );
+                ButtonStates0 [3] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates0 [3] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 4 );
+                ButtonStates0 [3] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard1Channel5 ()
+        {
+            if ( ButtonStates0 [4] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 5 );
+                ButtonStates0 [4] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates0 [4] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 5 );
+                ButtonStates0 [4] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard1Channel6 ()
+        {
+            if ( ButtonStates0 [5] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 6 );
+                ButtonStates0 [5] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates0 [5] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 6 );
+                ButtonStates0 [5] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard1Channel7 ()
+        {
+            if ( ButtonStates0 [6] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 7 );
+                ButtonStates0 [6] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates0 [6] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 7 );
+                ButtonStates0 [6] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard1Channel8 ()
+        {
+            if ( ButtonStates0 [7] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 0, 8 );
+                ButtonStates0 [7] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates0 [7] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 0, 8 );
+                ButtonStates0 [7] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel1 ()
+        {
+            if ( ButtonStates1 [0] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 1 );
+                ButtonStates1 [0] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [0] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 1 );
+                ButtonStates1 [0] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel2 ()
+        {
+            if ( ButtonStates1 [1] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 2 );
+                ButtonStates1 [1] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [1] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 2 );
+                ButtonStates1 [1] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel3 ()
+        {
+            if ( ButtonStates1 [2] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 3 );
+                ButtonStates1 [2] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [2] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 3 );
+                ButtonStates1 [2] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel4 ()
+        {
+            if ( ButtonStates1 [3] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 4 );
+                ButtonStates1 [3] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [3] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 4 );
+                ButtonStates1 [3] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel5 ()
+        {
+            if ( ButtonStates1 [4] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 5 );
+                ButtonStates1 [4] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [4] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 5 );
+                ButtonStates1 [4] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel6 ()
+        {
+            if ( ButtonStates1 [5] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 6 );
+                ButtonStates1 [5] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [5] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 6 );
+                ButtonStates1 [5] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel7 ()
+        {
+            if ( ButtonStates1 [6] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 7 );
+                ButtonStates1 [6] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [6] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 7 );
+                ButtonStates1 [6] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard2Channel8 ()
+        {
+            if ( ButtonStates1 [7] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 1, 8 );
+                ButtonStates1 [7] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates1 [7] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 1, 8 );
+                ButtonStates1 [7] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel1 ()
+        {
+            if ( ButtonStates2 [0] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 1 );
+                ButtonStates2 [0] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [0] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 1 );
+                ButtonStates2 [0] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel2 ()
+        {
+            if ( ButtonStates2 [1] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 2 );
+                ButtonStates2 [1] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [1] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 2 );
+                ButtonStates2 [1] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel3 ()
+        {
+            if ( ButtonStates2 [2] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 3 );
+                ButtonStates2 [2] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [2] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 3 );
+                ButtonStates2 [2] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel4 ()
+        {
+            if ( ButtonStates2 [3] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 4 );
+                ButtonStates2 [3] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [3] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 4 );
+                ButtonStates2 [3] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel5 ()
+        {
+            if ( ButtonStates2 [4] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 5 );
+                ButtonStates2 [4] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [4] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 5 );
+                ButtonStates2 [4] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel6 ()
+        {
+            if ( ButtonStates2 [5] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 6 );
+                ButtonStates2 [5] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [5] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 6 );
+                ButtonStates2 [5] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel7 ()
+        {
+            if ( ButtonStates2 [6] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 7 );
+                ButtonStates2 [6] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [6] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 7 );
+                ButtonStates2 [6] = buttonStateBrushList [0];
+            }
+        }
+        private void OpenCard3Channel8 ()
+        {
+            if ( ButtonStates2 [7] == buttonStateBrushList [0] )
+            {
+                scModel.SendChannelOpenRequest( 2, 8 );
+                ButtonStates2 [7] = buttonStateBrushList [1];
+            }
+            if ( ButtonStates2 [7] == buttonStateBrushList [1] )
+            {
+                scModel.SendChannelCloseRequest( 2, 8 );
+                ButtonStates2 [7] = buttonStateBrushList [0];
+            }
+        }
+        #endregion OpenCardChannel
         #endregion Methods.SerialPort
 
         #region Methods.UI
+
+        private void ChangeButtonState ( int cardIndex, int channelIndex, Brush brushToBeApplied)
+        {
+            Trace.WriteLine($"ChangeButtonState cardIndex: {cardIndex}, channelIndex: {channelIndex}, brushToBeApplied: {brushToBeApplied.ToString()}");
+            switch ( cardIndex )
+            {
+                case 0:
+                    buttonStates0 [channelIndex] = brushToBeApplied;
+                    break;
+                case 1:
+                    buttonStates1 [channelIndex] = brushToBeApplied;
+                    break;
+                case 2:
+                    buttonStates2 [channelIndex] = brushToBeApplied;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void PaintButtonBrushes ()
         {
@@ -400,7 +901,8 @@ namespace Arti.MVVM.ViewModel
         {
             for ( int i = 0; i < 8; i++ )
             {
-                errorStatusList0 [i] = errorStateBrushList [0];
+                errorStatusList0 [i] = errorStateBrushList [2];
+                errorStatusList01 [i] = errorStateBrushList [2];
                 errorStatusList1 [i] = errorStateBrushList [0];
                 errorStatusList2 [i] = errorStateBrushList [1];
             }
@@ -409,7 +911,7 @@ namespace Arti.MVVM.ViewModel
         {
             for ( int i = 0; i < 8; i++ )
             {
-                errorStatusList01 [i] = errorStateBrushList [1];
+                //errorStatusList01 [i] = errorStateBrushList [1];
                 errorStatusList11 [i] = errorStateBrushList [0];
                 errorStatusList21 [i] = errorStateBrushList [1];
             }
@@ -534,67 +1036,92 @@ namespace Arti.MVVM.ViewModel
                 model.MessageToShow = SerialDataReceived;
                 Trace.WriteLine( $"+++++++++ Model has created on ViewModel : {model.MessageDateTime} // {model.MessageToShow}" );
                 MessageReceived( model );
-                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates(model.MessageDateTime, model.MessageToShow));
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "ErrorReceived" ,model.MessageDateTime, model.MessageToShow ) );
+            }
+            else if ( e.PropertyName == "Card1ChannelCount" )
+            {
+                this.Card1ChannelCount = scModel.Card1ChannelCount;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1ChannelChanged", DateTime.Now, Card1ChannelCount.ToString() ) );
             }
         }
 
-        public void CheckForUIUpdates (DateTime dataTime, string data)
+        public void CheckForUIUpdates (string updateType,DateTime dataTime, string data)
         {
-            Trace.WriteLine("Error Code solving");
-            if ( data == "hata000"  && dataTime != DateTime.Now)
+            if ( updateType == "Card1ChannelChanged" )
             {
-                errorStatusList0 [0] = errorStateBrushList[0];
-                errorStatusList01 [0] = errorStateBrushList [0];
+                int countOpen = Convert.ToInt32( data );
+                int countClose = 8 - countOpen;
+                for ( int i = 0; i < countOpen; i++ )
+                {
+                    ErrorStatusList0 [i] = errorStateBrushList [1];
+                    ErrorStatusList01 [i] = errorStateBrushList [1];
+                }
+                int closedOnes = 7;
+                for ( int i = countClose; i > 0 ; i-- )
+                {
+                    ErrorStatusList0 [closedOnes] = errorStateBrushList [2];
+                    ErrorStatusList01 [closedOnes] = errorStateBrushList [2];
+                    closedOnes--;
+                }
             }
-            else if ( data == "hata001" )
+            else if ( updateType == "ErrorReceived" )
             {
-                errorStatusList0 [0] = errorStateBrushList [0];
-                errorStatusList01 [0] = errorStateBrushList [1];
-            }
-            else if ( data == "hata010" )
-            {
-                errorStatusList0 [0] = errorStateBrushList [1];
-                errorStatusList01 [0] = errorStateBrushList [0];
-            }
-            else if ( data == "hata011" )
-            {
-                errorStatusList0 [0] = errorStateBrushList [1];
-                errorStatusList01 [0] = errorStateBrushList [1];
-            }
-            else if ( data == "hata100" )
-            {
-                errorStatusList0 [1] = errorStateBrushList [0];
-                errorStatusList01 [1] = errorStateBrushList [0];
-            }
-            else if ( data == "hata101" )
-            {
-                errorStatusList0 [1] = errorStateBrushList [0];
-                errorStatusList01 [1] = errorStateBrushList [1];
-            }
-            else if ( data == "hata110" )
-            {
-                errorStatusList0 [1] = errorStateBrushList [1];
-                errorStatusList01 [1] = errorStateBrushList [0];
-            }
-            else if ( data == "hata111" )
-            {
-                errorStatusList0 [1] = errorStateBrushList [1];
-                errorStatusList01 [1] = errorStateBrushList [1];
-            }
-            else if ( data == "hata200" )
-            {
-                errorStatusList0 [2] = errorStateBrushList [0];
-                errorStatusList01 [2] = errorStateBrushList [0];
-            }
-            else if ( data == "hata201" )
-            {
-                errorStatusList0 [2] = errorStateBrushList [0];
-                errorStatusList01 [2] = errorStateBrushList [1];
-            }
-            else if ( data == "hata210" )
-            {
-                errorStatusList0 [2] = errorStateBrushList [1];
-                errorStatusList01 [2] = errorStateBrushList [0];
+                Trace.WriteLine( "Error Code solving" );
+                if ( data == "hata000" && dataTime != DateTime.Now )
+                {
+                    errorStatusList0 [0] = errorStateBrushList [0];
+                    errorStatusList01 [0] = errorStateBrushList [0];
+                }
+                else if ( data == "hata001" )
+                {
+                    errorStatusList0 [0] = errorStateBrushList [0];
+                    errorStatusList01 [0] = errorStateBrushList [1];
+                }
+                else if ( data == "hata010" )
+                {
+                    errorStatusList0 [0] = errorStateBrushList [1];
+                    errorStatusList01 [0] = errorStateBrushList [0];
+                }
+                else if ( data == "hata011" )
+                {
+                    errorStatusList0 [0] = errorStateBrushList [1];
+                    errorStatusList01 [0] = errorStateBrushList [1];
+                }
+                else if ( data == "hata100" )
+                {
+                    errorStatusList0 [1] = errorStateBrushList [0];
+                    errorStatusList01 [1] = errorStateBrushList [0];
+                }
+                else if ( data == "hata101" )
+                {
+                    errorStatusList0 [1] = errorStateBrushList [0];
+                    errorStatusList01 [1] = errorStateBrushList [1];
+                }
+                else if ( data == "hata110" )
+                {
+                    errorStatusList0 [1] = errorStateBrushList [1];
+                    errorStatusList01 [1] = errorStateBrushList [0];
+                }
+                else if ( data == "hata111" )
+                {
+                    errorStatusList0 [1] = errorStateBrushList [1];
+                    errorStatusList01 [1] = errorStateBrushList [1];
+                }
+                else if ( data == "hata200" )
+                {
+                    errorStatusList0 [2] = errorStateBrushList [0];
+                    errorStatusList01 [2] = errorStateBrushList [0];
+                }
+                else if ( data == "hata201" )
+                {
+                    errorStatusList0 [2] = errorStateBrushList [0];
+                    errorStatusList01 [2] = errorStateBrushList [1];
+                }
+                else if ( data == "hata210" )
+                {
+                    errorStatusList0 [2] = errorStateBrushList [1];
+                    errorStatusList01 [2] = errorStateBrushList [0];
+                }
             }
         }
 

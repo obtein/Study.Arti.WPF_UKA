@@ -107,42 +107,42 @@
             <Label Content="I-OVER" Grid.Row="1" Grid.Column="4"/>
             <!--1-->
             <Label Content="Out 1" Grid.Row="2" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates0[0]}" Grid.Row="2" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard1Channel1Command}" Background="{Binding ButtonStates0[0] , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="2" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[0]}" Grid.Row="2" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[0]}" Grid.Row="2" Grid.Column="4"/>
             <!--2-->
             <Label Content="Out 2" Grid.Row="3" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates0[1]}" Grid.Row="3" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard1Channel2Command}" Background="{Binding ButtonStates0[1]}" Grid.Row="3" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[1]}" Grid.Row="3" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[1]}" Grid.Row="3" Grid.Column="4"/>
             <!--3-->
             <Label Content="Out 3" Grid.Row="4" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates0[2]}" Grid.Row="4" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard1Channel3Command}" Background="{Binding ButtonStates0[2]}" Grid.Row="4" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[2]}" Grid.Row="4" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[2]}" Grid.Row="4" Grid.Column="4"/>
             <!--4-->
             <Label Content="Out 4" Grid.Row="5" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates0[3]}" Grid.Row="5" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard1Channel4Command}" Background="{Binding ButtonStates0[3]}" Grid.Row="5" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[3]}" Grid.Row="5" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[3]}" Grid.Row="5" Grid.Column="4"/>
             <!--5-->
             <Label Content="Out 5" Grid.Row="6" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates0[4]}" Grid.Row="6" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard1Channel5Command}" Background="{Binding ButtonStates0[4]}" Grid.Row="6" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[4]}" Grid.Row="6" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[4]}" Grid.Row="6" Grid.Column="4"/>
             <!--6-->
             <Label Content="Out 6" Grid.Row="7" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates0[5]}" Grid.Row="7" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard1Channel6Command}" Background="{Binding ButtonStates0[5]}" Grid.Row="7" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[5]}" Grid.Row="7" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[5]}" Grid.Row="7" Grid.Column="4"/>
             <!--7-->                                                  
-            <Label Content="Out 7" Grid.Row="8" Grid.Column="1"/>     
-            <Button Background="{Binding ButtonStates0[6]}" Grid.Row="8" Grid.Column="2"/>
+            <Label Content="Out 7" Grid.Row="8" Grid.Column="1"/>
+            <Button Command="{Binding OpenCard1Channel7Command}" Background="{Binding ButtonStates0[6]}" Grid.Row="8" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[6]}" Grid.Row="8" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[6]}" Grid.Row="8" Grid.Column="4"/>
             <!--8-->                                                  
-            <Label Content="Out 8" Grid.Row="9" Grid.Column="1"/>     
-            <Button Background="{Binding ButtonStates0[7]}" Grid.Row="9" Grid.Column="2"/>
+            <Label Content="Out 8" Grid.Row="9" Grid.Column="1"/>
+            <Button Command="{Binding OpenCard1Channel8Command}" Background="{Binding ButtonStates0[7]}" Grid.Row="9" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList0[7]}" Grid.Row="9" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList01[7]}" Grid.Row="9" Grid.Column="4"/>
         </Grid>
@@ -181,42 +181,42 @@
             <Label Content="I-OVER" Grid.Row="1" Grid.Column="4"/>
             <!--1-->
             <Label Content="Out 1" Grid.Row="2" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[0]}" Grid.Row="2" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel1Command}" Background="{Binding ButtonStates1[0]}" Grid.Row="2" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[0]}" Grid.Row="2" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[0]}" Grid.Row="2" Grid.Column="4"/>
             <!--2-->
             <Label Content="Out 2" Grid.Row="3" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[1]}" Grid.Row="3" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel2Command}" Background="{Binding ButtonStates1[1]}" Grid.Row="3" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[1]}" Grid.Row="3" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[1]}" Grid.Row="3" Grid.Column="4"/>
             <!--3-->
             <Label Content="Out 3" Grid.Row="4" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[2]}" Grid.Row="4" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel3Command}" Background="{Binding ButtonStates1[2]}" Grid.Row="4" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[2]}" Grid.Row="4" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[2]}" Grid.Row="4" Grid.Column="4"/>
             <!--4-->
             <Label Content="Out 4" Grid.Row="5" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[3]}" Grid.Row="5" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel4Command}" Background="{Binding ButtonStates1[3]}" Grid.Row="5" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[3]}" Grid.Row="5" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[3]}" Grid.Row="5" Grid.Column="4"/>
             <!--5-->
             <Label Content="Out 5" Grid.Row="6" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[4]}" Grid.Row="6" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel5Command}" Background="{Binding ButtonStates1[4]}" Grid.Row="6" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[4]}" Grid.Row="6" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[4]}" Grid.Row="6" Grid.Column="4"/>
             <!--6-->
             <Label Content="Out 6" Grid.Row="7" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[5]}" Grid.Row="7" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel6Command}" Background="{Binding ButtonStates1[5]}" Grid.Row="7" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[5]}" Grid.Row="7" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[5]}" Grid.Row="7" Grid.Column="4"/>
             <!--7-->
             <Label Content="Out 7" Grid.Row="8" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[6]}" Grid.Row="8" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel7Command}" Background="{Binding ButtonStates1[6]}" Grid.Row="8" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[6]}" Grid.Row="8" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[6]}" Grid.Row="8" Grid.Column="4"/>
             <!--8-->
             <Label Content="Out 8" Grid.Row="9" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates1[7]}" Grid.Row="9" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard2Channel8Command}" Background="{Binding ButtonStates1[7]}" Grid.Row="9" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList1[7]}" Grid.Row="9" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList11[7]}" Grid.Row="9" Grid.Column="4"/>
         </Grid>
@@ -255,42 +255,42 @@
             <Label Content="I-OVER" Grid.Row="1" Grid.Column="4"/>
             <!--1-->
             <Label Content="Out 1" Grid.Row="2" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[0]}" Grid.Row="2" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel1Command}" Background="{Binding ButtonStates2[0]}" Grid.Row="2" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[0]}" Grid.Row="2" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[0]}" Grid.Row="2" Grid.Column="4"/>
             <!--2-->
             <Label Content="Out 2" Grid.Row="3" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[1]}" Grid.Row="3" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel2Command}" Background="{Binding ButtonStates2[1]}" Grid.Row="3" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[1]}" Grid.Row="3" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[1]}" Grid.Row="3" Grid.Column="4"/>
             <!--3-->
             <Label Content="Out 3" Grid.Row="4" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[2]}" Grid.Row="4" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel3Command}" Background="{Binding ButtonStates2[2]}" Grid.Row="4" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[2]}" Grid.Row="4" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[2]}" Grid.Row="4" Grid.Column="4"/>
             <!--4-->
             <Label Content="Out 4" Grid.Row="5" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[3]}" Grid.Row="5" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel4Command}" Background="{Binding ButtonStates2[3]}" Grid.Row="5" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[3]}" Grid.Row="5" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[3]}" Grid.Row="5" Grid.Column="4"/>
             <!--5-->
             <Label Content="Out 5" Grid.Row="6" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[4]}" Grid.Row="6" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel5Command}" Background="{Binding ButtonStates2[4]}" Grid.Row="6" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[4]}" Grid.Row="6" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[4]}" Grid.Row="6" Grid.Column="4"/>
             <!--6-->
             <Label Content="Out 6" Grid.Row="7" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[5]}" Grid.Row="7" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel6Command}" Background="{Binding ButtonStates2[5]}" Grid.Row="7" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[5]}" Grid.Row="7" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[5]}" Grid.Row="7" Grid.Column="4"/>
             <!--7-->
             <Label Content="Out 7" Grid.Row="8" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[6]}" Grid.Row="8" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel7Command}" Background="{Binding ButtonStates2[6]}" Grid.Row="8" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[6]}" Grid.Row="8" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[6]}" Grid.Row="8" Grid.Column="4"/>
             <!--8-->
             <Label Content="Out 8" Grid.Row="9" Grid.Column="1"/>
-            <Button Background="{Binding ButtonStates2[7]}" Grid.Row="9" Grid.Column="2"/>
+            <Button Command="{Binding OpenCard3Channel8Command}" Background="{Binding ButtonStates2[7]}" Grid.Row="9" Grid.Column="2"/>
             <Canvas Background="{Binding ErrorStatusList2[7]}" Grid.Row="9" Grid.Column="3"/>
             <Canvas Background="{Binding ErrorStatusList21[7]}" Grid.Row="9" Grid.Column="4"/>
         </Grid>
