@@ -1653,7 +1653,7 @@ namespace Arti.MVVM.ViewModel
         /// Card channel controllers green for communication red for not communication
         /// Brush Picker 0 - not communicating , 1 - communicating, 2- not connected
         /// </summary>
-        private Brush [] buttonStateBrushList = { Brushes.DarkRed, Brushes.LightGreen, Brushes.DarkGray };
+        private Brush [] buttonStateBrushList = { Brushes.DarkRed, Brushes.LightGreen, Brushes.Transparent ,Brushes.Gray };
         private ObservableCollection<Brush> buttonStates0;
         public ObservableCollection<Brush> ButtonStates0
         {
@@ -1682,7 +1682,7 @@ namespace Arti.MVVM.ViewModel
         /// <summary>
         /// For handling 2 errors for each channel
         /// </summary>
-        private Brush [] errorStateBrushList = { Brushes.Red, Brushes.SpringGreen, Brushes.DarkGray };
+        private Brush [] errorStateBrushList = { Brushes.Red, Brushes.SpringGreen, Brushes.Transparent ,Brushes.Gray };
         // For card0 VoltageError
         private ObservableCollection<Brush> errorStatusList0;
         public ObservableCollection<Brush> ErrorStatusList0
@@ -1931,28 +1931,18 @@ namespace Arti.MVVM.ViewModel
             errorStatusList01 = new ObservableCollection<Brush>( new Brush [8] );
             errorStatusList11 = new ObservableCollection<Brush>( new Brush [8] );
             errorStatusList21 = new ObservableCollection<Brush>( new Brush [8] );
+
             errorStatusShortCircuitList0 = new ObservableCollection<Brush>( new Brush [8] );
             errorStatusShortCircuitList1 = new ObservableCollection<Brush>( new Brush [8] );
             errorStatusShortCircuitList2 = new ObservableCollection<Brush>( new Brush [8] );
-            PaintError0Brushes();
-            PaintError1Brushes();
-            Trace.WriteLine( "ViewModelConstructor" );
+
             buttonStates0 = new ObservableCollection<Brush>( new Brush [8] );
             buttonStates1 = new ObservableCollection<Brush>( new Brush [8] );
             buttonStates2 = new ObservableCollection<Brush>( new Brush [8] );
-            ButtonStates0 [0] = Brushes.DarkRed;
-            ButtonStates0 [1] = Brushes.DarkRed;
-            ButtonStates0 [2] = Brushes.DarkRed;
-            ButtonStates0 [3] = Brushes.DarkRed;
-            ButtonStates0 [4] = Brushes.DarkRed;
-            ButtonStates0 [5] = Brushes.DarkRed;
-            ButtonStates0 [6] = Brushes.DarkRed;
-            ButtonStates0 [7] = Brushes.DarkRed;
+
             IsSerialPaneEnabled = false;
-            CanvasBackground0 = Brushes.DarkGray;
-            CanvasBackground1 = Brushes.DarkGray;
-            CanvasBackground2 = Brushes.DarkGray;
             serialPortToBeOpenedDetails = new ObservableCollection<object>( new object [10] );
+
             MessageList = new ObservableCollection<MessageModel>();
             SerialCommunicationSelectedCommand = new RelayCommand(SerialCommunicationSelected);
             OpenSerialPortCommand = new RelayCommand(OpenSerialPortConnection);
@@ -1984,6 +1974,9 @@ namespace Arti.MVVM.ViewModel
             OpenCard3Channel6Command = new RelayCommand( OpenCard3Channel6 );
             OpenCard3Channel7Command = new RelayCommand( OpenCard3Channel7 );
             OpenCard3Channel8Command = new RelayCommand( OpenCard3Channel8 );
+
+            PaintUIForFirstEnterance();
+
         }
         #endregion Constructors
 
@@ -2025,12 +2018,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [0] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 1 );
-                ButtonStates0 [0] = buttonStateBrushList [1];
             }
             else if ( ButtonStates0 [0] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 1 );
-                ButtonStates0 [0] = buttonStateBrushList [0];
             }
         }
         private void OpenCard1Channel2 ()
@@ -2038,12 +2029,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [1] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 2 );
-                ButtonStates0 [1] = buttonStateBrushList [1];
             }
             if ( ButtonStates0 [1] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 2 );
-                ButtonStates0 [1] = buttonStateBrushList [0];
             }
         }
         private void OpenCard1Channel3 ()
@@ -2051,12 +2040,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [2] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 3 );
-                ButtonStates0 [2] = buttonStateBrushList [1];
             }
             if ( ButtonStates0 [2] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 3 );
-                ButtonStates0 [2] = buttonStateBrushList [0];
             }
         }
         private void OpenCard1Channel4 ()
@@ -2064,12 +2051,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [3] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 4 );
-                ButtonStates0 [3] = buttonStateBrushList [1];
             }
             if ( ButtonStates0 [3] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 4 );
-                ButtonStates0 [3] = buttonStateBrushList [0];
             }
         }
         private void OpenCard1Channel5 ()
@@ -2077,12 +2062,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [4] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 5 );
-                ButtonStates0 [4] = buttonStateBrushList [1];
             }
             if ( ButtonStates0 [4] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 5 );
-                ButtonStates0 [4] = buttonStateBrushList [0];
             }
         }
         private void OpenCard1Channel6 ()
@@ -2090,12 +2073,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [5] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 6 );
-                ButtonStates0 [5] = buttonStateBrushList [1];
             }
             if ( ButtonStates0 [5] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 6 );
-                ButtonStates0 [5] = buttonStateBrushList [0];
             }
         }
         private void OpenCard1Channel7 ()
@@ -2103,12 +2084,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [6] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 7 );
-                ButtonStates0 [6] = buttonStateBrushList [1];
             }
             if ( ButtonStates0 [6] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 7 );
-                ButtonStates0 [6] = buttonStateBrushList [0];
             }
         }
         private void OpenCard1Channel8 ()
@@ -2116,12 +2095,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates0 [7] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 0, 8 );
-                ButtonStates0 [7] = buttonStateBrushList [1];
             }
             if ( ButtonStates0 [7] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 0, 8 );
-                ButtonStates0 [7] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel1 ()
@@ -2129,12 +2106,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [0] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 1 );
-                ButtonStates1 [0] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [0] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 1 );
-                ButtonStates1 [0] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel2 ()
@@ -2142,12 +2117,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [1] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 2 );
-                ButtonStates1 [1] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [1] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 2 );
-                ButtonStates1 [1] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel3 ()
@@ -2155,12 +2128,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [2] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 3 );
-                ButtonStates1 [2] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [2] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 3 );
-                ButtonStates1 [2] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel4 ()
@@ -2168,12 +2139,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [3] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 4 );
-                ButtonStates1 [3] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [3] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 4 );
-                ButtonStates1 [3] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel5 ()
@@ -2181,12 +2150,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [4] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 5 );
-                ButtonStates1 [4] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [4] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 5 );
-                ButtonStates1 [4] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel6 ()
@@ -2194,12 +2161,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [5] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 6 );
-                ButtonStates1 [5] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [5] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 6 );
-                ButtonStates1 [5] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel7 ()
@@ -2207,12 +2172,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [6] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 7 );
-                ButtonStates1 [6] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [6] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 7 );
-                ButtonStates1 [6] = buttonStateBrushList [0];
             }
         }
         private void OpenCard2Channel8 ()
@@ -2220,12 +2183,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates1 [7] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 1, 8 );
-                ButtonStates1 [7] = buttonStateBrushList [1];
             }
             if ( ButtonStates1 [7] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 1, 8 );
-                ButtonStates1 [7] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel1 ()
@@ -2233,12 +2194,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [0] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 1 );
-                ButtonStates2 [0] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [0] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 1 );
-                ButtonStates2 [0] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel2 ()
@@ -2246,12 +2205,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [1] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 2 );
-                ButtonStates2 [1] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [1] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 2 );
-                ButtonStates2 [1] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel3 ()
@@ -2259,12 +2216,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [2] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 3 );
-                ButtonStates2 [2] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [2] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 3 );
-                ButtonStates2 [2] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel4 ()
@@ -2272,12 +2227,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [3] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 4 );
-                ButtonStates2 [3] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [3] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 4 );
-                ButtonStates2 [3] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel5 ()
@@ -2285,12 +2238,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [4] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 5 );
-                ButtonStates2 [4] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [4] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 5 );
-                ButtonStates2 [4] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel6 ()
@@ -2298,12 +2249,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [5] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 6 );
-                ButtonStates2 [5] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [5] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 6 );
-                ButtonStates2 [5] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel7 ()
@@ -2311,12 +2260,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [6] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 7 );
-                ButtonStates2 [6] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [6] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 7 );
-                ButtonStates2 [6] = buttonStateBrushList [0];
             }
         }
         private void OpenCard3Channel8 ()
@@ -2324,12 +2271,10 @@ namespace Arti.MVVM.ViewModel
             if ( ButtonStates2 [7] == buttonStateBrushList [0] )
             {
                 scModel.SendChannelOpenRequest( 2, 8 );
-                ButtonStates2 [7] = buttonStateBrushList [1];
             }
             if ( ButtonStates2 [7] == buttonStateBrushList [1] )
             {
                 scModel.SendChannelCloseRequest( 2, 8 );
-                ButtonStates2 [7] = buttonStateBrushList [0];
             }
         }
         #endregion OpenCardChannel
@@ -2355,34 +2300,55 @@ namespace Arti.MVVM.ViewModel
                     break;
             }
         }
-
+        /// <summary>
+        /// Paint UI
+        /// </summary>
         private void PaintButtonBrushes ()
         {
             for ( int i = 0; i < 8; i++ )
             {
-                buttonStates0 [i] = buttonStateBrushList [0];
-                buttonStates1 [i] = buttonStateBrushList [0];
-                buttonStates2 [i] = buttonStateBrushList [1];
+                buttonStates0 [i] = Brushes.Transparent;
+                buttonStates1 [i] = Brushes.Transparent;
+                buttonStates2 [i] = Brushes.Transparent;
             }
         }
         private void PaintError0Brushes ()
         {
             for ( int i = 0; i < 8; i++ )
             {
-                errorStatusList0 [i] = errorStateBrushList [2];
-                errorStatusList01 [i] = errorStateBrushList [2];
-                errorStatusList1 [i] = errorStateBrushList [0];
-                errorStatusList2 [i] = errorStateBrushList [1];
+                errorStatusList0 [i] = Brushes.Transparent;
+                errorStatusList01 [i] = Brushes.Transparent;
+                errorStatusList1 [i] = Brushes.Transparent;
+                errorStatusList2 [i] = Brushes.Transparent;
             }
         }
         private void PaintError1Brushes ()
         {
             for ( int i = 0; i < 8; i++ )
             {
-                //errorStatusList01 [i] = errorStateBrushList [1];
-                errorStatusList11 [i] = errorStateBrushList [0];
-                errorStatusList21 [i] = errorStateBrushList [1];
+                errorStatusList01 [i] = Brushes.Transparent;
+                errorStatusList11 [i] = Brushes.Transparent;
+                errorStatusList21 [i] = Brushes.Transparent;
             }
+        }
+        private void PaintChannelBrushes ()
+        {
+            for ( int i = 0; i < 8; i++ )
+            {
+                errorStatusShortCircuitList0 [i] = Brushes.Transparent;
+                errorStatusShortCircuitList1 [i] = Brushes.Transparent;
+                errorStatusShortCircuitList2 [i] = Brushes.Transparent;
+            }
+        }
+        private void PaintUIForFirstEnterance ()
+        {
+            PaintButtonBrushes();
+            PaintChannelBrushes();
+            PaintError0Brushes();
+            PaintError1Brushes();
+            CanvasBackground0 = Brushes.DarkGray;
+            CanvasBackground1 = Brushes.DarkGray;
+            CanvasBackground2 = Brushes.DarkGray;
         }
 
         /// <summary>
@@ -2750,7 +2716,7 @@ namespace Arti.MVVM.ViewModel
                         ErrorStatusList01 [0] = errorStateBrushList [0];
                         ErrorStatusList0 [0] = errorStateBrushList [0];
                         break;
-                    case "128":
+                    case "False":
                         ErrorStatusShortCircuitList0 [0] = errorStateBrushList [3];
                         ErrorStatusList01 [0] = errorStateBrushList [3];
                         ErrorStatusList0 [0] = errorStateBrushList [3];

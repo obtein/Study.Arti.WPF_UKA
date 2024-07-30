@@ -27,12 +27,33 @@ namespace Arti.MVVM.Model
         //ManualResetEvent readComplete = new ManualResetEvent( false );
         #region Properties
         /// <summary>
+        /// Communication constants
+        /// </summary>
+        private readonly byte STX = 0x02;
+        private readonly byte ETX = 0x03; 
+        private readonly byte ID = 0x39;
+        private readonly byte CHANNEL_INSPECTION = 0xC9;
+        private readonly byte ANALOG_INSPECTION = 0xCA;
+        private readonly byte CARD_ERROR_INSPECTION = 0xCB;
+        private readonly byte WAR_MODE = 0xCC;
+        private readonly byte TEMPERATURE_INSPECTION = 0xCD;
+        private readonly byte CARD1_OPEN_CLOSE = 0xCE;
+        private readonly byte CARD2_OPEN_CLOSE = 0xCF;
+        private readonly byte CARD3_OPEN_CLOSE = 0xD0;
+        private readonly byte CARD1_OPEN_CHANNEL = 0xD4;
+        private readonly byte CARD2_OPEN_CHANNEL = 0xD5;
+        private readonly byte CARD3_OPEN_CHANNEL = 0xD6;
+        private readonly byte CARD1_CLOSE_CHANNEL = 0xD7;
+        private readonly byte CARD2_CLOSE_CHANNEL = 0xD8;
+        private readonly byte CARD3_CLOSE_CHANNEL = 0xD9;
+
+        /// <summary>
         /// Declaring variables needed to create a serial connection
         /// </summary>
         private System.Timers.Timer errorInspectorTimer; // To send error checks periodically
-        private System.Timers.Timer card1InspectorTimer;
-        private System.Timers.Timer card2InspectorTimer;
-        private System.Timers.Timer card3InspectorTimer;
+        private System.Timers.Timer cardOpenClosedInspectorTimer;
+        private System.Timers.Timer cardErrorInspectorTimer;
+        private System.Timers.Timer cardAnalogInspectorTimer;
         private bool isInspectorOnWork;
         private string deviceID; // Unique ID for communication handshake
         private readonly SerialPort selectedSerialPort;
@@ -1600,7 +1621,7 @@ namespace Arti.MVVM.Model
             dataReceiverBuffer = new StringBuilder();
             selectedSerialPort.DataReceived += async ( sender, e ) => await OnDataReceivedAsync();
             selectedSerialPort.Open();
-            //SendChannelInspection();
+            SendChannelInspection();
             //StartInspecting();
             IsCommunicationActive = false;
             Trace.WriteLine($"Serialport opened : deviceID :{DeviceID} || Comport :{SelectedPortName} || BaudRate :{SelectedBaudRate} || Parity :{SelectedParity}" +
@@ -1648,7 +1669,16 @@ namespace Arti.MVVM.Model
         ///     each part of the data i.e. 0-15 card1, 16-31 card2, 31-47 card3 will be divided
         ///     as bit0 represents ShortCircuit, bit1 represents OverCurrent, bi2 represents VoltageError
         ///     bit3-7 are reserved.
-        ///     ******NOTE : if there is no communication data will be (128)!!! 
+        ///     ******NOTE : if there is no communication data will be (128)!!!
+        /// 4 - 0xCE is for Card1 open/closed response
+        ///     response is 0x02 0x39 0xCE 0x30 0x32 dataToBeChecked checkSum 0x03
+        ///     dataToBeChecked is 2 bytes and contain open/close information at its lsb
+        /// 5 - 0xCF is for Card2 open/closed response
+        ///     response is 0x02 0x39 0xCF 0x30 0x32 dataToBeChecked checkSum 0x03
+        ///     dataToBeChecked is 2 bytes and contain open/close information at its lsb
+        /// 6 - 0xD0 is for Card2 open/closed response
+        ///     response is 0x02 0x39 0xD0 0x30 0x32 dataToBeChecked checkSum 0x03
+        ///     dataToBeChecked is 2 bytes and contain open/close information at its lsb
         /// </summary>
         /// <param name="msgCode"></param>
         /// <param name="dataToBeChecked"></param>
@@ -1850,58 +1880,105 @@ namespace Arti.MVVM.Model
         {
 
         }
-
+        /// <summary>
+        /// Sends Channel inspection for starting communication and gets channel amount for each card connected
+        /// </summary>
+        /// <returns></returns>
         private async Task SendChannelInspection () // start of the conversation
         {
             if ( selectedSerialPort.IsOpen )
             {
-                selectedSerialPort.BaseStream.Write( new byte [] { 0x02, 0x39, 0xC9, 0x30, 0x30, 0x46, 0x30, 0x03 }, 0, 8 );
+                byte [] temp = CalculateCheckSum(new byte [] { STX, ID, CHANNEL_INSPECTION, 0x30, 0x30 } );
+                byte [] toBeSent = { STX, ID, CHANNEL_INSPECTION, 0x30, 0x30, temp [0], temp [1], ETX };
+                selectedSerialPort.BaseStream.Write( toBeSent, 0, 8 );
+            }
+            //App.Current.Dispatcher.Invoke( () => StartInspecting() );
+        }
+        /// <summary>
+        /// Sends Analog inspection
+        /// </summary>
+        /// <returns></returns>
+        private async Task SendAnalogInspection ()
+        {
+            if ( selectedSerialPort.IsOpen )
+            {
+                byte [] temp = CalculateCheckSum(new byte [] { STX, ID, ANALOG_INSPECTION, 0x30, 0x30 } );
+                byte [] toBeSent = { STX, ID, ANALOG_INSPECTION, 0x30, 0x30, temp [0], temp[1], ETX };
+                selectedSerialPort.BaseStream.Write(toBeSent, 0, 8);
+            }
+        }
+        /// <summary>
+        /// Sends card error inspection
+        /// </summary>
+        private async Task SendCardErrorInspection ()
+        {
+            if ( selectedSerialPort.IsOpen )
+            {
+                byte [] temp = CalculateCheckSum(new byte [] { STX, ID, CARD_ERROR_INSPECTION, 0x30, 0x30 } );
+                byte [] toBeSent = { STX, ID, CARD_ERROR_INSPECTION, 0x30, 0x30, temp [0], temp [1], 0x03 };
+                selectedSerialPort.Write( toBeSent, 0, 8 );
+            }
+        }
+        /// <summary>
+        /// Sends inspection open/close CARD1
+        /// </summary>
+        private void SendCard1OpenOrClosed ()
+        {
+            if ( selectedSerialPort.IsOpen )
+            {
+                byte [] temp = CalculateCheckSum( new byte [] { STX, ID, CARD1_OPEN_CLOSE, 0x30, 0x30 } );
+                byte [] toBeSent = { STX, ID, CARD1_OPEN_CLOSE, 0x30, 0x30, temp [0], temp [1], ETX };
+                selectedSerialPort.Write( toBeSent, 0, 8 );
+            }
+        }
+        /// <summary>
+        /// Sends inspection open/close CARD2
+        /// </summary>
+        private void SendCard2OpenOrClosed ()
+        {
+            if ( selectedSerialPort.IsOpen )
+            {
+                byte [] temp = CalculateCheckSum( new byte [] { STX, ID, CARD2_OPEN_CLOSE, 0x30, 0x30 } );
+                byte [] toBeSent = { STX, ID, CARD2_OPEN_CLOSE, 0x30, 0x30, temp [0], temp [1], ETX };
+                selectedSerialPort.Write( toBeSent, 0, 8 );
+            }
+        }
+        /// <summary>
+        /// Sends inspection open/close CARD3
+        /// </summary>
+        private void SendCard3OpenOrClosed ()
+        {
+            if ( selectedSerialPort.IsOpen )
+            {
+                byte [] temp = CalculateCheckSum( new byte [] { STX, ID, CARD3_OPEN_CLOSE, 0x30, 0x30 } );
+                byte [] toBeSent = { STX, ID, CARD3_OPEN_CLOSE, 0x30, 0x30, temp [0], temp [1], ETX };
+                selectedSerialPort.Write( toBeSent, 0, 8 );
             }
         }
 
+
+
+        /// <summary>
+        /// Sends open request for specifed cards channel
+        /// </summary>
+        /// <param name="cardIndex"></param>
+        /// <param name="channelIndex"></param>
         public void SendChannelOpenRequest (int cardIndex, int channelIndex)
         {
             byte [] dataToBeSent = CalculateOpenCommandToBeSent(cardIndex, channelIndex);
             selectedSerialPort.BaseStream.Write(dataToBeSent);
         }
-
+        /// <summary>
+        /// Sends close request for specifed cards channel
+        /// </summary>
+        /// <param name="cardIndex"></param>
+        /// <param name="channelIndex"></param>
         public void SendChannelCloseRequest ( int cardIndex, int channelIndex )
         {
             byte [] dataToBeSent = CalculateCloseCommandToBeSent( cardIndex, channelIndex );
             selectedSerialPort.BaseStream.Write( dataToBeSent );
         }
 
-        private void SendCardErrorInspection ()
-        {
-            if ( selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xCB, 0x33, 0x30, 0x00, 0xF3, 0x03 }, 0, 8 );
-            }
-        }
-
-        private void SendCard1OpenOrClosed ()
-        {
-            if ( selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xCE, 0x30, 0x30, 0x00, 0xF5, 0x03 }, 0, 8 );
-            }
-        }
-
-        private void SendCard2OpenOrClosed ()
-        {
-            if ( selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xCF, 0x30, 0x30, 0x00, 0xF4, 0x03 }, 0, 8 );
-            }
-        }
-
-        private void SendCard3OpenOrClosed ()
-        {
-            if ( selectedSerialPort.IsOpen )
-            {
-                selectedSerialPort.Write( new byte [] { 0x02, 0x39, 0xD0, 0x30, 0x30, 0x00, 0xEB, 0x03 }, 0, 8 );
-            }
-        }
 
         private void StartInspecting ()
         {
@@ -1911,31 +1988,28 @@ namespace Arti.MVVM.Model
                 return;
 
             isInspectorOnWork = true;
-            errorInspectorTimer = new System.Timers.Timer( 500 ); // Set the interval to 500ms
-            card1InspectorTimer = new System.Timers.Timer( 100 ); // Set the interval to 500ms
-            card2InspectorTimer = new System.Timers.Timer( 100 ); // Set the interval to 500ms
-            card3InspectorTimer = new System.Timers.Timer( 100 ); // Set the interval to 500ms
+            errorInspectorTimer = new System.Timers.Timer( 500 ); // Set the interval of Error Inspection to 500ms
+            cardOpenClosedInspectorTimer = new System.Timers.Timer( 102 ); // Set the interval of OpenClose inspection to 102ms
+            cardAnalogInspectorTimer = new System.Timers.Timer( 251 ); // Set the interval to 251ms
             errorInspectorTimer.Elapsed += OnErrorInspectorTimerElapsed;
-            card1InspectorTimer.Elapsed += OnCard1InspectorTimerElapsed;
-            card2InspectorTimer.Elapsed += OnCard2InspectorTimerElapsed;
-            card3InspectorTimer.Elapsed += OnCard3InspectorTimerElapsed;
+            cardOpenClosedInspectorTimer.Elapsed += OnCardOpenClosedInspectorTimerElapsed;
+            cardAnalogInspectorTimer.Elapsed += OnCardAnalogInspectorTimerElapsed;
             errorInspectorTimer.Start();
         }
         private async void OnErrorInspectorTimerElapsed ( object sender, ElapsedEventArgs e )
         {
             SendCardErrorInspection();
         }
-        private async void OnCard1InspectorTimerElapsed ( object sender, ElapsedEventArgs e )
+        private async void OnCardOpenClosedInspectorTimerElapsed ( object sender, ElapsedEventArgs e )
         {
             SendCard1OpenOrClosed();
-        }
-        private async void OnCard2InspectorTimerElapsed ( object sender, ElapsedEventArgs e )
-        {
             SendCard2OpenOrClosed();
-        }
-        private async void OnCard3InspectorTimerElapsed ( object sender, ElapsedEventArgs e )
-        {
             SendCard3OpenOrClosed();
+        }
+
+        private async void OnCardAnalogInspectorTimerElapsed ( object sender, ElapsedEventArgs e )
+        {
+            SendAnalogInspection();
         }
 
         #region DataManupulation
@@ -2060,9 +2134,9 @@ namespace Arti.MVVM.Model
             byte [] checkSumCalc = new byte [9]; // to calculate checksum
             byte [] checkSumTemp = new byte [2]; // to send checksum Method
                                                  // Generic properties
-            byte stx = 0x02;
-            byte etx = 0x03;
-            byte id = 0x39;
+            byte stx = STX;
+            byte etx = ETX;
+            byte id = ID;
             byte msgCode = 0x00;
             // Data part
             byte dataLengthMSB = 0x30;
@@ -2077,15 +2151,15 @@ namespace Arti.MVVM.Model
 
             if ( cardIndex == 0 )
             {
-                msgCode = 0xD4;
+                msgCode = CARD1_OPEN_CHANNEL;
             }
             else if ( cardIndex == 1 )
             {
-                msgCode = 0xD5;
+                msgCode = CARD2_OPEN_CHANNEL;
             }
             else if ( cardIndex == 2 )
             {
-                msgCode = 0xD6;
+                msgCode = CARD3_OPEN_CHANNEL;
             }
 
             if ( channelIndex == 1 )
@@ -2217,9 +2291,9 @@ namespace Arti.MVVM.Model
             byte [] checkSumCalc = new byte [9]; // to calculate checksum
             byte [] checkSumTemp = new byte [2]; // to send checksum Method
                                                  // Generic properties
-            byte stx = 0x02;
-            byte etx = 0x03;
-            byte id = 0x39;
+            byte stx = STX;
+            byte etx = ETX;
+            byte id = ID;
             byte msgCode = 0x00;
             // Data part
             byte dataLengthMSB = 0x30;
@@ -2234,15 +2308,15 @@ namespace Arti.MVVM.Model
 
             if ( cardIndex == 0 )
             {
-                msgCode = 0xD7;
+                msgCode = CARD1_CLOSE_CHANNEL;
             }
             else if ( cardIndex == 1 )
             {
-                msgCode = 0xD8;
+                msgCode = CARD2_CLOSE_CHANNEL;
             }
             else if ( cardIndex == 2 )
             {
-                msgCode = 0xD9;
+                msgCode = CARD3_CLOSE_CHANNEL;
             }
 
             if ( channelIndex == 1 )
