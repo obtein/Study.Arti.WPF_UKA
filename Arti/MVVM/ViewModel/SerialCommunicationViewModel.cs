@@ -42,6 +42,1432 @@ namespace Arti.MVVM.ViewModel
                 }
             }
         }
+
+        private int card2ChannelCount;
+
+        public int Card2ChannelCount
+        {
+            get
+            {
+                return card2ChannelCount;
+            }
+            set
+            {
+                if ( card2ChannelCount != value )
+                {
+                    card2ChannelCount = value;
+                    OnPropertyChanged( nameof( Card2ChannelCount ) );
+                }
+            }
+        }
+        private int card3ChannelCount;
+
+        public int Card3ChannelCount
+        {
+            get
+            {
+                return card3ChannelCount;
+            }
+            set
+            {
+                if ( card3ChannelCount != value )
+                {
+                    card3ChannelCount = value;
+                    OnPropertyChanged( nameof( Card3ChannelCount ) );
+                }
+            }
+        }
+
+        #region CardAndChannels
+        /// <summary>
+        /// For tracinkg error conditions
+        /// </summary>
+        private int card1Channel1IsOk;
+
+        public int Card1Channel1IsOk
+        {
+            get
+            {
+                return card1Channel1IsOk;
+            }
+            set
+            {
+                if ( card1Channel1IsOk != value )
+                {
+                    card1Channel1IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel1IsOk ) );
+                }
+            }
+        }
+
+        private int card1Channel2IsOk;
+
+        public int Card1Channel2IsOk
+        {
+            get
+            {
+                return card1Channel2IsOk;
+            }
+            set
+            {
+                if ( card1Channel2IsOk != value )
+                {
+                    card1Channel2IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel2IsOk ) );
+                }
+            }
+        }
+
+        private int card1Channel3IsOk;
+
+        public int Card1Channel3IsOk
+        {
+            get
+            {
+                return card1Channel3IsOk;
+            }
+            set
+            {
+                if ( card1Channel3IsOk != value )
+                {
+                    card1Channel3IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel3IsOk ) );
+                }
+            }
+        }
+
+        private int card1Channel4IsOk;
+
+        public int Card1Channel4IsOk
+        {
+            get
+            {
+                return card1Channel4IsOk;
+            }
+            set
+            {
+                if ( card1Channel4IsOk != value )
+                {
+                    card1Channel4IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel4IsOk ) );
+                }
+            }
+        }
+
+        private int card1Channel5IsOk;
+
+        public int Card1Channel5IsOk
+        {
+            get
+            {
+                return card1Channel5IsOk;
+            }
+            set
+            {
+                if ( card1Channel5IsOk != value )
+                {
+                    card1Channel5IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel5IsOk ) );
+                }
+            }
+        }
+
+        private int card1Channel6IsOk;
+
+        public int Card1Channel6IsOk
+        {
+            get
+            {
+                return card1Channel6IsOk;
+            }
+            set
+            {
+                if ( card1Channel6IsOk != value )
+                {
+                    card1Channel6IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel6IsOk ) );
+                }
+            }
+        }
+
+        private int card1Channel7IsOk;
+
+        public int Card1Channel7IsOk
+        {
+            get
+            {
+                return card1Channel7IsOk;
+            }
+            set
+            {
+                if ( card1Channel7IsOk != value )
+                {
+                    card1Channel7IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel7IsOk ) );
+                }
+            }
+        }
+
+        private int card1Channel8IsOk;
+
+        public int Card1Channel8IsOk
+        {
+            get
+            {
+                return card1Channel8IsOk;
+            }
+            set
+            {
+                if ( card1Channel8IsOk != value )
+                {
+                    card1Channel8IsOk = value;
+                    OnPropertyChanged( nameof( Card1Channel8IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel1IsOk;
+
+        public int Card2Channel1IsOk
+        {
+            get
+            {
+                return card2Channel1IsOk;
+            }
+            set
+            {
+                if ( card2Channel1IsOk != value )
+                {
+                    card2Channel1IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel1IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel2IsOk;
+
+        public int Card2Channel2IsOk
+        {
+            get
+            {
+                return card2Channel2IsOk;
+            }
+            set
+            {
+                if ( card2Channel2IsOk != value )
+                {
+                    card2Channel2IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel2IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel3IsOk;
+
+        public int Card2Channel3IsOk
+        {
+            get
+            {
+                return card2Channel3IsOk;
+            }
+            set
+            {
+                if ( card2Channel3IsOk != value )
+                {
+                    card2Channel3IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel3IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel4IsOk;
+
+        public int Card2Channel4IsOk
+        {
+            get
+            {
+                return card2Channel4IsOk;
+            }
+            set
+            {
+                if ( card2Channel4IsOk != value )
+                {
+                    card2Channel4IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel4IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel5IsOk;
+
+        public int Card2Channel5IsOk
+        {
+            get
+            {
+                return card2Channel5IsOk;
+            }
+            set
+            {
+                if ( card2Channel5IsOk != value )
+                {
+                    card2Channel5IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel5IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel6IsOk;
+
+        public int Card2Channel6IsOk
+        {
+            get
+            {
+                return card2Channel6IsOk;
+            }
+            set
+            {
+                if ( card2Channel6IsOk != value )
+                {
+                    card2Channel6IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel6IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel7IsOk;
+
+        public int Card2Channel7IsOk
+        {
+            get
+            {
+                return card2Channel7IsOk;
+            }
+            set
+            {
+                if ( card2Channel7IsOk != value )
+                {
+                    card2Channel7IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel7IsOk ) );
+                }
+            }
+        }
+
+        private int card2Channel8IsOk;
+
+        public int Card2Channel8IsOk
+        {
+            get
+            {
+                return card2Channel8IsOk;
+            }
+            set
+            {
+                if ( card2Channel8IsOk != value )
+                {
+                    card2Channel8IsOk = value;
+                    OnPropertyChanged( nameof( Card2Channel8IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel1IsOk;
+
+        public int Card3Channel1IsOk
+        {
+            get
+            {
+                return card3Channel1IsOk;
+            }
+            set
+            {
+                if ( card3Channel1IsOk != value )
+                {
+                    card3Channel1IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel1IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel2IsOk;
+
+        public int Card3Channel2IsOk
+        {
+            get
+            {
+                return card3Channel2IsOk;
+            }
+            set
+            {
+                if ( card3Channel2IsOk != value )
+                {
+                    card3Channel2IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel2IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel3IsOk;
+
+        public int Card3Channel3IsOk
+        {
+            get
+            {
+                return card3Channel3IsOk;
+            }
+            set
+            {
+                if ( card3Channel3IsOk != value )
+                {
+                    card3Channel3IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel3IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel4IsOk;
+
+        public int Card3Channel4IsOk
+        {
+            get
+            {
+                return card3Channel4IsOk;
+            }
+            set
+            {
+                if ( card3Channel4IsOk != value )
+                {
+                    card3Channel4IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel4IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel5IsOk;
+
+        public int Card3Channel5IsOk
+        {
+            get
+            {
+                return card3Channel5IsOk;
+            }
+            set
+            {
+                if ( card3Channel5IsOk != value )
+                {
+                    card3Channel5IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel5IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel6IsOk;
+
+        public int Card3Channel6IsOk
+        {
+            get
+            {
+                return card3Channel6IsOk;
+            }
+            set
+            {
+                if ( card3Channel6IsOk != value )
+                {
+                    card3Channel6IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel6IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel7IsOk;
+
+        public int Card3Channel7IsOk
+        {
+            get
+            {
+                return card3Channel7IsOk;
+            }
+            set
+            {
+                if ( card3Channel7IsOk != value )
+                {
+                    card3Channel7IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel7IsOk ) );
+                }
+            }
+        }
+
+        private int card3Channel8IsOk;
+
+        public int Card3Channel8IsOk
+        {
+            get
+            {
+                return card3Channel8IsOk;
+            }
+            set
+            {
+                if ( card3Channel8IsOk != value )
+                {
+                    card3Channel8IsOk = value;
+                    OnPropertyChanged( nameof( Card3Channel8IsOk ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// For tracking whether communication is active or not
+        /// </summary>
+        private bool card1IsActive;
+
+        public bool Card1IsActive
+        {
+            get
+            {
+                return card1IsActive;
+            }
+            set
+            {
+                if ( card1IsActive != value )
+                {
+                    card1IsActive = value;
+                    OnPropertyChanged( nameof( Card1IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel1IsActive;
+
+        public bool Card1Channel1IsActive
+        {
+            get
+            {
+                return card1Channel1IsActive;
+            }
+            set
+            {
+                if ( card1Channel1IsActive != value )
+                {
+                    card1Channel1IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel1IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel2IsActive;
+
+        public bool Card1Channel2IsActive
+        {
+            get
+            {
+                return card1Channel2IsActive;
+            }
+            set
+            {
+                if ( card1Channel2IsActive != value )
+                {
+                    card1Channel2IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel2IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel3IsActive;
+
+        public bool Card1Channel3IsActive
+        {
+            get
+            {
+                return card1Channel3IsActive;
+            }
+            set
+            {
+                if ( card1Channel3IsActive != value )
+                {
+                    card1Channel3IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel3IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel4IsActive;
+
+        public bool Card1Channel4IsActive
+        {
+            get
+            {
+                return card1Channel4IsActive;
+            }
+            set
+            {
+                if ( card1Channel4IsActive != value )
+                {
+                    card1Channel4IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel4IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel5IsActive;
+
+        public bool Card1Channel5IsActive
+        {
+            get
+            {
+                return card1Channel5IsActive;
+            }
+            set
+            {
+                if ( card1Channel5IsActive != value )
+                {
+                    card1Channel5IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel5IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel6IsActive;
+
+        public bool Card1Channel6IsActive
+        {
+            get
+            {
+                return card1Channel6IsActive;
+            }
+            set
+            {
+                if ( card1Channel6IsActive != value )
+                {
+                    card1Channel6IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel6IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel7IsActive;
+
+        public bool Card1Channel7IsActive
+        {
+            get
+            {
+                return card1Channel7IsActive;
+            }
+            set
+            {
+                if ( card1Channel7IsActive != value )
+                {
+                    card1Channel7IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel7IsActive ) );
+                }
+            }
+        }
+        private bool card1Channel8IsActive;
+
+        public bool Card1Channel8IsActive
+        {
+            get
+            {
+                return card1Channel8IsActive;
+            }
+            set
+            {
+                if ( card1Channel8IsActive != value )
+                {
+                    card1Channel8IsActive = value;
+                    OnPropertyChanged( nameof( Card1Channel8IsActive ) );
+                }
+            }
+        }
+        private bool card2IsActive;
+
+        public bool Card2IsActive
+        {
+            get
+            {
+                return card2IsActive;
+            }
+            set
+            {
+                if ( card2IsActive != value )
+                {
+                    card2IsActive = value;
+                    OnPropertyChanged( nameof( Card2IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel1IsActive;
+
+        public bool Card2Channel1IsActive
+        {
+            get
+            {
+                return card2Channel1IsActive;
+            }
+            set
+            {
+                if ( card2Channel1IsActive != value )
+                {
+                    card2Channel1IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel1IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel2IsActive;
+
+        public bool Card2Channel2IsActive
+        {
+            get
+            {
+                return card2Channel2IsActive;
+            }
+            set
+            {
+                if ( card2Channel2IsActive != value )
+                {
+                    card2Channel2IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel2IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel3IsActive;
+
+        public bool Card2Channel3IsActive
+        {
+            get
+            {
+                return card2Channel3IsActive;
+            }
+            set
+            {
+                if ( card2Channel3IsActive != value )
+                {
+                    card2Channel3IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel3IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel4IsActive;
+
+        public bool Card2Channel4IsActive
+        {
+            get
+            {
+                return card2Channel4IsActive;
+            }
+            set
+            {
+                if ( card2Channel4IsActive != value )
+                {
+                    card2Channel4IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel4IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel5IsActive;
+
+        public bool Card2Channel5IsActive
+        {
+            get
+            {
+                return card2Channel5IsActive;
+            }
+            set
+            {
+                if ( card2Channel5IsActive != value )
+                {
+                    card2Channel5IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel5IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel6IsActive;
+
+        public bool Card2Channel6IsActive
+        {
+            get
+            {
+                return card2Channel6IsActive;
+            }
+            set
+            {
+                if ( card2Channel6IsActive != value )
+                {
+                    card2Channel6IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel6IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel7IsActive;
+
+        public bool Card2Channel7IsActive
+        {
+            get
+            {
+                return card2Channel7IsActive;
+            }
+            set
+            {
+                if ( card2Channel7IsActive != value )
+                {
+                    card2Channel7IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel7IsActive ) );
+                }
+            }
+        }
+        private bool card2Channel8IsActive;
+
+        public bool Card2Channel8IsActive
+        {
+            get
+            {
+                return card2Channel8IsActive;
+            }
+            set
+            {
+                if ( card2Channel8IsActive != value )
+                {
+                    card2Channel8IsActive = value;
+                    OnPropertyChanged( nameof( Card2Channel8IsActive ) );
+                }
+            }
+        }
+        private bool card3IsActive;
+
+        public bool Card3IsActive
+        {
+            get
+            {
+                return card3IsActive;
+            }
+            set
+            {
+                if ( card3IsActive != value )
+                {
+                    card3IsActive = value;
+                    OnPropertyChanged( nameof( Card3IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel1IsActive;
+
+        public bool Card3Channel1IsActive
+        {
+            get
+            {
+                return card3Channel1IsActive;
+            }
+            set
+            {
+                if ( card3Channel1IsActive != value )
+                {
+                    card3Channel1IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel1IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel2IsActive;
+
+        public bool Card3Channel2IsActive
+        {
+            get
+            {
+                return card3Channel2IsActive;
+            }
+            set
+            {
+                if ( card3Channel2IsActive != value )
+                {
+                    card3Channel2IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel2IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel3IsActive;
+
+        public bool Card3Channel3IsActive
+        {
+            get
+            {
+                return card3Channel3IsActive;
+            }
+            set
+            {
+                if ( card3Channel3IsActive != value )
+                {
+                    card3Channel3IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel3IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel4IsActive;
+
+        public bool Card3Channel4IsActive
+        {
+            get
+            {
+                return card3Channel4IsActive;
+            }
+            set
+            {
+                if ( card3Channel4IsActive != value )
+                {
+                    card3Channel4IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel4IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel5IsActive;
+
+        public bool Card3Channel5IsActive
+        {
+            get
+            {
+                return card3Channel5IsActive;
+            }
+            set
+            {
+                if ( card3Channel5IsActive != value )
+                {
+                    card3Channel5IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel5IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel6IsActive;
+
+        public bool Card3Channel6IsActive
+        {
+            get
+            {
+                return card3Channel6IsActive;
+            }
+            set
+            {
+                if ( card3Channel6IsActive != value )
+                {
+                    card3Channel6IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel6IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel7IsActive;
+
+        public bool Card3Channel7IsActive
+        {
+            get
+            {
+                return card3Channel7IsActive;
+            }
+            set
+            {
+                if ( card3Channel7IsActive != value )
+                {
+                    card3Channel7IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel7IsActive ) );
+                }
+            }
+        }
+        private bool card3Channel8IsActive;
+
+        public bool Card3Channel8IsActive
+        {
+            get
+            {
+                return card3Channel8IsActive;
+            }
+            set
+            {
+                if ( card3Channel8IsActive != value )
+                {
+                    card3Channel8IsActive = value;
+                    OnPropertyChanged( nameof( Card3Channel8IsActive ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// For tracking card voltages and channel currents
+        /// </summary>
+
+        private int card1Voltage;
+
+        public int Card1Voltage
+        {
+            get
+            {
+                return card1Voltage;
+            }
+            set
+            {
+                if ( card1Voltage != value )
+                {
+                    card1Voltage = value;
+                    OnPropertyChanged( nameof( Card1Voltage ) );
+                }
+            }
+        }
+
+        private int card1Channel1Current;
+
+        public int Card1Channel1Current
+        {
+            get
+            {
+                return card1Channel1Current;
+            }
+            set
+            {
+                if ( card1Channel1Current != value )
+                {
+                    card1Channel1Current = value;
+                    OnPropertyChanged( nameof( Card1Channel1Current ) );
+                }
+            }
+        }
+
+        private int card1Channel2Current;
+
+        public int Card1Channel2Current
+        {
+            get
+            {
+                return card1Channel2Current;
+            }
+            set
+            {
+                if ( card1Channel2Current != value )
+                {
+                    card1Channel2Current = value;
+                    OnPropertyChanged( nameof( Card1Channel2Current ) );
+                }
+            }
+        }
+
+        private int card1Channel3Current;
+
+        public int Card1Channel3Current
+        {
+            get
+            {
+                return card1Channel3Current;
+            }
+            set
+            {
+                if ( card1Channel3Current != value )
+                {
+                    card1Channel3Current = value;
+                    OnPropertyChanged( nameof( Card1Channel3Current ) );
+                }
+            }
+        }
+
+        private int card1Channel4Current;
+
+        public int Card1Channel4Current
+        {
+            get
+            {
+                return card1Channel4Current;
+            }
+            set
+            {
+                if ( card1Channel4Current != value )
+                {
+                    card1Channel4Current = value;
+                    OnPropertyChanged( nameof( Card1Channel4Current ) );
+                }
+            }
+        }
+
+        private int card1Channel5Current;
+
+        public int Card1Channel5Current
+        {
+            get
+            {
+                return card1Channel5Current;
+            }
+            set
+            {
+                if ( card1Channel5Current != value )
+                {
+                    card1Channel5Current = value;
+                    OnPropertyChanged( nameof( Card1Channel5Current ) );
+                }
+            }
+        }
+
+        private int card1Channel6Current;
+
+        public int Card1Channel6Current
+        {
+            get
+            {
+                return card1Channel6Current;
+            }
+            set
+            {
+                if ( card1Channel6Current != value )
+                {
+                    card1Channel6Current = value;
+                    OnPropertyChanged( nameof( Card1Channel6Current ) );
+                }
+            }
+        }
+
+        private int card1Channel7Current;
+
+        public int Card1Channel7Current
+        {
+            get
+            {
+                return card1Channel7Current;
+            }
+            set
+            {
+                if ( card1Channel7Current != value )
+                {
+                    card1Channel7Current = value;
+                    OnPropertyChanged( nameof( Card1Channel7Current ) );
+                }
+            }
+        }
+
+        private int card1Channel8Current;
+
+        public int Card1Channel8Current
+        {
+            get
+            {
+                return card1Channel8Current;
+            }
+            set
+            {
+                if ( card1Channel8Current != value )
+                {
+                    card1Channel8Current = value;
+                    OnPropertyChanged( nameof( Card1Channel8Current ) );
+                }
+            }
+        }
+
+        private int card2Voltage;
+
+        public int Card2Voltage
+        {
+            get
+            {
+                return card2Voltage;
+            }
+            set
+            {
+                if ( card2Voltage != value )
+                {
+                    card2Voltage = value;
+                    OnPropertyChanged( nameof( Card2Voltage ) );
+                }
+            }
+        }
+
+        private int card2Channel1Current;
+
+        public int Card2Channel1Current
+        {
+            get
+            {
+                return card2Channel1Current;
+            }
+            set
+            {
+                if ( card2Channel1Current != value )
+                {
+                    card2Channel1Current = value;
+                    OnPropertyChanged( nameof( Card2Channel1Current ) );
+                }
+            }
+        }
+
+        private int card2Channel2Current;
+
+        public int Card2Channel2Current
+        {
+            get
+            {
+                return card2Channel2Current;
+            }
+            set
+            {
+                if ( card2Channel2Current != value )
+                {
+                    card2Channel2Current = value;
+                    OnPropertyChanged( nameof( Card2Channel2Current ) );
+                }
+            }
+        }
+
+        private int card2Channel3Current;
+
+        public int Card2Channel3Current
+        {
+            get
+            {
+                return card2Channel3Current;
+            }
+            set
+            {
+                if ( card2Channel3Current != value )
+                {
+                    card2Channel3Current = value;
+                    OnPropertyChanged( nameof( Card2Channel3Current ) );
+                }
+            }
+        }
+
+        private int card2Channel4Current;
+
+        public int Card2Channel4Current
+        {
+            get
+            {
+                return card2Channel4Current;
+            }
+            set
+            {
+                if ( card2Channel4Current != value )
+                {
+                    card2Channel4Current = value;
+                    OnPropertyChanged( nameof( Card2Channel4Current ) );
+                }
+            }
+        }
+
+        private int card2Channel5Current;
+
+        public int Card2Channel5Current
+        {
+            get
+            {
+                return card2Channel5Current;
+            }
+            set
+            {
+                if ( card2Channel5Current != value )
+                {
+                    card2Channel5Current = value;
+                    OnPropertyChanged( nameof( Card2Channel5Current ) );
+                }
+            }
+        }
+
+        private int card2Channel6Current;
+
+        public int Card2Channel6Current
+        {
+            get
+            {
+                return card2Channel6Current;
+            }
+            set
+            {
+                if ( card2Channel6Current != value )
+                {
+                    card2Channel6Current = value;
+                    OnPropertyChanged( nameof( Card2Channel6Current ) );
+                }
+            }
+        }
+
+        private int card2Channel7Current;
+
+        public int Card2Channel7Current
+        {
+            get
+            {
+                return card2Channel7Current;
+            }
+            set
+            {
+                if ( card2Channel7Current != value )
+                {
+                    card2Channel7Current = value;
+                    OnPropertyChanged( nameof( Card2Channel7Current ) );
+                }
+            }
+        }
+
+        private int card2Channel8Current;
+
+        public int Card2Channel8Current
+        {
+            get
+            {
+                return card2Channel8Current;
+            }
+            set
+            {
+                if ( card2Channel8Current != value )
+                {
+                    card2Channel8Current = value;
+                    OnPropertyChanged( nameof( Card2Channel8Current ) );
+                }
+            }
+        }
+
+        private int card3Voltage;
+
+        public int Card3Voltage
+        {
+            get
+            {
+                return card3Voltage;
+            }
+            set
+            {
+                if ( card3Voltage != value )
+                {
+                    card3Voltage = value;
+                    OnPropertyChanged( nameof( Card3Voltage ) );
+                }
+            }
+        }
+
+        private int card3Channel1Current;
+
+        public int Card3Channel1Current
+        {
+            get
+            {
+                return card3Channel1Current;
+            }
+            set
+            {
+                if ( card3Channel1Current != value )
+                {
+                    card3Channel1Current = value;
+                    OnPropertyChanged( nameof( Card3Channel1Current ) );
+                }
+            }
+        }
+
+        private int card3Channel2Current;
+
+        public int Card3Channel2Current
+        {
+            get
+            {
+                return card3Channel2Current;
+            }
+            set
+            {
+                if ( card3Channel2Current != value )
+                {
+                    card3Channel2Current = value;
+                    OnPropertyChanged( nameof( Card3Channel2Current ) );
+                }
+            }
+        }
+
+        private int card3Channel3Current;
+
+        public int Card3Channel3Current
+        {
+            get
+            {
+                return card3Channel3Current;
+            }
+            set
+            {
+                if ( card3Channel3Current != value )
+                {
+                    card3Channel3Current = value;
+                    OnPropertyChanged( nameof( Card3Channel3Current ) );
+                }
+            }
+        }
+
+        private int card3Channel4Current;
+
+        public int Card3Channel4Current
+        {
+            get
+            {
+                return card3Channel4Current;
+            }
+            set
+            {
+                if ( card3Channel4Current != value )
+                {
+                    card3Channel4Current = value;
+                    OnPropertyChanged( nameof( Card3Channel4Current ) );
+                }
+            }
+        }
+
+        private int card3Channel5Current;
+
+        public int Card3Channel5Current
+        {
+            get
+            {
+                return card3Channel5Current;
+            }
+            set
+            {
+                if ( card3Channel5Current != value )
+                {
+                    card3Channel5Current = value;
+                    OnPropertyChanged( nameof( Card3Channel5Current ) );
+                }
+            }
+        }
+
+        private int card3Channel6Current;
+
+        public int Card3Channel6Current
+        {
+            get
+            {
+                return card3Channel6Current;
+            }
+            set
+            {
+                if ( card3Channel6Current != value )
+                {
+                    card3Channel6Current = value;
+                    OnPropertyChanged( nameof( Card3Channel6Current ) );
+                }
+            }
+        }
+
+        private int card3Channel7Current;
+
+        public int Card3Channel7Current
+        {
+            get
+            {
+                return card3Channel7Current;
+            }
+            set
+            {
+                if ( card3Channel7Current != value )
+                {
+                    card3Channel7Current = value;
+                    OnPropertyChanged( nameof( Card3Channel7Current ) );
+                }
+            }
+        }
+
+        private int card3Channel8Current;
+
+        public int Card3Channel8Current
+        {
+            get
+            {
+                return card3Channel8Current;
+            }
+            set
+            {
+                if ( card3Channel8Current != value )
+                {
+                    card3Channel8Current = value;
+                    OnPropertyChanged( nameof( Card3Channel8Current ) );
+                }
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Variables
@@ -227,7 +1653,7 @@ namespace Arti.MVVM.ViewModel
         /// Card channel controllers green for communication red for not communication
         /// Brush Picker 0 - not communicating , 1 - communicating, 2- not connected
         /// </summary>
-        private Brush [] buttonStateBrushList = { Brushes.DarkRed, Brushes.LimeGreen, Brushes.Transparent };
+        private Brush [] buttonStateBrushList = { Brushes.DarkRed, Brushes.LightGreen, Brushes.DarkGray };
         private ObservableCollection<Brush> buttonStates0;
         public ObservableCollection<Brush> ButtonStates0
         {
@@ -256,8 +1682,8 @@ namespace Arti.MVVM.ViewModel
         /// <summary>
         /// For handling 2 errors for each channel
         /// </summary>
-        private Brush [] errorStateBrushList = { Brushes.Red, Brushes.SpringGreen, Brushes.Transparent };
-        // For card0 err0
+        private Brush [] errorStateBrushList = { Brushes.Red, Brushes.SpringGreen, Brushes.DarkGray };
+        // For card0 VoltageError
         private ObservableCollection<Brush> errorStatusList0;
         public ObservableCollection<Brush> ErrorStatusList0
         {
@@ -270,7 +1696,7 @@ namespace Arti.MVVM.ViewModel
                 errorStatusList0 = value;
             }
         }
-        // For card0 err1
+        // For card0 OverCurrent
         private ObservableCollection<Brush> errorStatusList01;
         public ObservableCollection<Brush> ErrorStatusList01
         {
@@ -283,7 +1709,20 @@ namespace Arti.MVVM.ViewModel
                 errorStatusList01 = value;
             }
         }
-        // For card1 err0
+        //For card0 ShortCircuit
+        private ObservableCollection<Brush> errorStatusShortCircuitList0;
+        public ObservableCollection<Brush> ErrorStatusShortCircuitList0
+        {
+            get
+            {
+                return errorStatusShortCircuitList0;
+            }
+            set
+            {
+                errorStatusShortCircuitList0 = value;
+            }
+        }
+        // For card1 VoltageError
         private ObservableCollection<Brush> errorStatusList1;
         public ObservableCollection<Brush> ErrorStatusList1
         {
@@ -296,7 +1735,7 @@ namespace Arti.MVVM.ViewModel
                 errorStatusList1 = value;
             }
         }
-        // For card1 err1
+        // For card1 OverCurrent
         private ObservableCollection<Brush> errorStatusList11;
         public ObservableCollection<Brush> ErrorStatusList11
         {
@@ -309,7 +1748,20 @@ namespace Arti.MVVM.ViewModel
                 errorStatusList11 = value;
             }
         }
-        // For card2 err0
+        //For card1 ShortCircuit
+        private ObservableCollection<Brush> errorStatusShortCircuitList1;
+        public ObservableCollection<Brush> ErrorStatusShortCircuitList1
+        {
+            get
+            {
+                return errorStatusShortCircuitList1;
+            }
+            set
+            {
+                errorStatusShortCircuitList1 = value;
+            }
+        }
+        // For card2 VoltageError
         private ObservableCollection<Brush> errorStatusList2;
         public ObservableCollection<Brush> ErrorStatusList2
         {
@@ -322,7 +1774,7 @@ namespace Arti.MVVM.ViewModel
                 errorStatusList2 = value;
             }
         }
-        // For card2 err1
+        // For card2 OverCurrent
         private ObservableCollection<Brush> errorStatusList21;
         public ObservableCollection<Brush> ErrorStatusList21
         {
@@ -333,6 +1785,19 @@ namespace Arti.MVVM.ViewModel
             set
             {
                 errorStatusList21 = value;
+            }
+        }
+        //For card0 ShortCircuit
+        private ObservableCollection<Brush> errorStatusShortCircuitList2;
+        public ObservableCollection<Brush> ErrorStatusShortCircuitList2
+        {
+            get
+            {
+                return errorStatusShortCircuitList2;
+            }
+            set
+            {
+                errorStatusShortCircuitList2 = value;
             }
         }
         #endregion Variables.View
@@ -466,6 +1931,9 @@ namespace Arti.MVVM.ViewModel
             errorStatusList01 = new ObservableCollection<Brush>( new Brush [8] );
             errorStatusList11 = new ObservableCollection<Brush>( new Brush [8] );
             errorStatusList21 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusShortCircuitList0 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusShortCircuitList1 = new ObservableCollection<Brush>( new Brush [8] );
+            errorStatusShortCircuitList2 = new ObservableCollection<Brush>( new Brush [8] );
             PaintError0Brushes();
             PaintError1Brushes();
             Trace.WriteLine( "ViewModelConstructor" );
@@ -1043,6 +2511,136 @@ namespace Arti.MVVM.ViewModel
                 this.Card1ChannelCount = scModel.Card1ChannelCount;
                 App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1ChannelChanged", DateTime.Now, Card1ChannelCount.ToString() ) );
             }
+            else if ( e.PropertyName == "Card2ChannelCount" )
+            {
+                this.Card2ChannelCount = scModel.Card2ChannelCount;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2ChannelChanged", DateTime.Now, Card2ChannelCount.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3ChannelCount" )
+            {
+                this.Card3ChannelCount = scModel.Card3ChannelCount;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3ChannelChanged", DateTime.Now, Card3ChannelCount.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel1IsOk" )
+            {
+                this.Card1Channel1IsOk = scModel.Card1Channel1IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel1IsOkChanged", DateTime.Now, Card1Channel1IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel2IsOk" )
+            {
+                this.Card1Channel2IsOk = scModel.Card1Channel2IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel2IsOkChanged", DateTime.Now, Card1Channel2IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel3IsOk" )
+            {
+                this.Card1Channel3IsOk = scModel.Card1Channel3IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel3IsOkChanged", DateTime.Now, Card1Channel3IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel4IsOk" )
+            {
+                this.Card1Channel4IsOk = scModel.Card1Channel4IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel4IsOkChanged", DateTime.Now, Card1Channel4IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel5IsOk" )
+            {
+                this.Card1Channel5IsOk = scModel.Card1Channel5IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel5IsOkChanged", DateTime.Now, Card1Channel5IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel6IsOk" )
+            {
+                this.Card1Channel6IsOk = scModel.Card1Channel6IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel6IsOkChanged", DateTime.Now, Card1Channel6IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel7IsOk" )
+            {
+                this.Card1Channel7IsOk = scModel.Card1Channel7IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel7IsOkChanged", DateTime.Now, Card1Channel7IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card1Channel8IsOk" )
+            {
+                this.Card1Channel8IsOk = scModel.Card1Channel8IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card1Channel8IsOkChanged", DateTime.Now, Card1Channel8IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel1IsOk" )
+            {
+                this.Card2Channel1IsOk = scModel.Card2Channel1IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel1IsOkChanged", DateTime.Now, Card2Channel1IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel2IsOk" )
+            {
+                this.Card2Channel2IsOk = scModel.Card2Channel2IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel2IsOkChanged", DateTime.Now, Card2Channel2IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel3IsOk" )
+            {
+                this.Card2Channel3IsOk = scModel.Card2Channel3IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel3IsOkChanged", DateTime.Now, Card2Channel3IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel4IsOk" )
+            {
+                this.Card2Channel4IsOk = scModel.Card2Channel4IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel4IsOkChanged", DateTime.Now, Card2Channel4IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel5IsOk" )
+            {
+                this.Card2Channel5IsOk = scModel.Card2Channel5IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel5IsOkChanged", DateTime.Now, Card2Channel5IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel6IsOk" )
+            {
+                this.Card2Channel6IsOk = scModel.Card2Channel6IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel6IsOkChanged", DateTime.Now, Card2Channel6IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel7IsOk" )
+            {
+                this.Card2Channel7IsOk = scModel.Card2Channel7IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel7IsOkChanged", DateTime.Now, Card2Channel7IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card2Channel8IsOk" )
+            {
+                this.Card2Channel8IsOk = scModel.Card2Channel8IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card2Channel8IsOkChanged", DateTime.Now, Card2Channel8IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel1IsOk" )
+            {
+                this.Card3Channel1IsOk = scModel.Card3Channel1IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel1IsOkChanged", DateTime.Now, Card3Channel1IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel2IsOk" )
+            {
+                this.Card3Channel2IsOk = scModel.Card3Channel2IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel2IsOkChanged", DateTime.Now, Card3Channel2IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel3IsOk" )
+            {
+                this.Card3Channel3IsOk = scModel.Card3Channel3IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel3IsOkChanged", DateTime.Now, Card3Channel3IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel4IsOk" )
+            {
+                this.Card3Channel4IsOk = scModel.Card3Channel4IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel4IsOkChanged", DateTime.Now, Card3Channel4IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel5IsOk" )
+            {
+                this.Card3Channel5IsOk = scModel.Card3Channel5IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel5IsOkChanged", DateTime.Now, Card3Channel5IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel6IsOk" )
+            {
+                this.Card3Channel6IsOk = scModel.Card3Channel6IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel6IsOkChanged", DateTime.Now, Card3Channel6IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel7IsOk" )
+            {
+                this.Card3Channel7IsOk = scModel.Card3Channel7IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel7IsOkChanged", DateTime.Now, Card3Channel7IsOk.ToString() ) );
+            }
+            else if ( e.PropertyName == "Card3Channel8IsOk" )
+            {
+                this.Card3Channel8IsOk = scModel.Card3Channel8IsOk;
+                App.Current.Dispatcher.Invoke( () => CheckForUIUpdates( "Card3Channel8IsOkChanged", DateTime.Now, Card3Channel8IsOk.ToString() ) );
+            }
         }
 
         public void CheckForUIUpdates (string updateType,DateTime dataTime, string data)
@@ -1057,11 +2655,1557 @@ namespace Arti.MVVM.ViewModel
                     ErrorStatusList01 [i] = errorStateBrushList [1];
                 }
                 int closedOnes = 7;
-                for ( int i = countClose; i > 0 ; i-- )
+                for ( int i = countClose; i > 0; i-- )
                 {
                     ErrorStatusList0 [closedOnes] = errorStateBrushList [2];
                     ErrorStatusList01 [closedOnes] = errorStateBrushList [2];
                     closedOnes--;
+                }
+            }
+            else if ( updateType == "Card2ChannelChanged" )
+            {
+                int countOpen = Convert.ToInt32( data );
+                int countClose = 8 - countOpen;
+                for ( int i = 0; i < countOpen; i++ )
+                {
+                    ErrorStatusList1 [i] = errorStateBrushList [1];
+                    ErrorStatusList11 [i] = errorStateBrushList [1];
+                }
+                int closedOnes = 7;
+                for ( int i = countClose; i > 0; i-- )
+                {
+                    ErrorStatusList1 [closedOnes] = errorStateBrushList [2];
+                    ErrorStatusList11 [closedOnes] = errorStateBrushList [2];
+                    closedOnes--;
+                }
+            }
+            else if ( updateType == "Card3ChannelChanged" )
+            {
+                int countOpen = Convert.ToInt32( data );
+                int countClose = 8 - countOpen;
+                for ( int i = 0; i < countOpen; i++ )
+                {
+                    ErrorStatusList2 [i] = errorStateBrushList [1];
+                    ErrorStatusList21 [i] = errorStateBrushList [1];
+                }
+                int closedOnes = 7;
+                for ( int i = countClose; i > 0; i-- )
+                {
+                    ErrorStatusList2 [closedOnes] = errorStateBrushList [2];
+                    ErrorStatusList21 [closedOnes] = errorStateBrushList [2];
+                    closedOnes--;
+                }
+            }
+            else if ( updateType == "Card1Channel1IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [1];
+                        ErrorStatusList01 [0] = errorStateBrushList [1];
+                        ErrorStatusList0 [0] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [0];
+                        ErrorStatusList01 [0] = errorStateBrushList [1];
+                        ErrorStatusList0 [0] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [1];
+                        ErrorStatusList01 [0] = errorStateBrushList [0];
+                        ErrorStatusList0 [0] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [0];
+                        ErrorStatusList01 [0] = errorStateBrushList [0];
+                        ErrorStatusList0 [0] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [1];
+                        ErrorStatusList01 [0] = errorStateBrushList [1];
+                        ErrorStatusList0 [0] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [0];
+                        ErrorStatusList01 [0] = errorStateBrushList [1];
+                        ErrorStatusList0 [0] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [1];
+                        ErrorStatusList01 [0] = errorStateBrushList [0];
+                        ErrorStatusList0 [0] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [0];
+                        ErrorStatusList01 [0] = errorStateBrushList [0];
+                        ErrorStatusList0 [0] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [0] = errorStateBrushList [3];
+                        ErrorStatusList01 [0] = errorStateBrushList [3];
+                        ErrorStatusList0 [0] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card1Channel2IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [1];
+                        ErrorStatusList01 [1] = errorStateBrushList [1];
+                        ErrorStatusList0 [1] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [0];
+                        ErrorStatusList01 [1] = errorStateBrushList [1];
+                        ErrorStatusList0 [1] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [1];
+                        ErrorStatusList01 [1] = errorStateBrushList [0];
+                        ErrorStatusList0 [1] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [0];
+                        ErrorStatusList01 [1] = errorStateBrushList [0];
+                        ErrorStatusList0 [1] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [1];
+                        ErrorStatusList01 [1] = errorStateBrushList [1];
+                        ErrorStatusList0 [1] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [0];
+                        ErrorStatusList01 [1] = errorStateBrushList [1];
+                        ErrorStatusList0 [1] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [1];
+                        ErrorStatusList01 [1] = errorStateBrushList [0];
+                        ErrorStatusList0 [1] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [0];
+                        ErrorStatusList01 [1] = errorStateBrushList [0];
+                        ErrorStatusList0 [1] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [1] = errorStateBrushList [3];
+                        ErrorStatusList01 [1] = errorStateBrushList [3];
+                        ErrorStatusList0 [1] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card1Channel3IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [1];
+                        ErrorStatusList01 [2] = errorStateBrushList [1];
+                        ErrorStatusList0 [2] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [0];
+                        ErrorStatusList01 [2] = errorStateBrushList [1];
+                        ErrorStatusList0 [2] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [1];
+                        ErrorStatusList01 [2] = errorStateBrushList [0];
+                        ErrorStatusList0 [2] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [0];
+                        ErrorStatusList01 [2] = errorStateBrushList [0];
+                        ErrorStatusList0 [2] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [1];
+                        ErrorStatusList01 [2] = errorStateBrushList [1];
+                        ErrorStatusList0 [2] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [0];
+                        ErrorStatusList01 [2] = errorStateBrushList [1];
+                        ErrorStatusList0 [2] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [1];
+                        ErrorStatusList01 [2] = errorStateBrushList [0];
+                        ErrorStatusList0 [2] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [0];
+                        ErrorStatusList01 [2] = errorStateBrushList [0];
+                        ErrorStatusList0 [2] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [2] = errorStateBrushList [3];
+                        ErrorStatusList01 [2] = errorStateBrushList [3];
+                        ErrorStatusList0 [2] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card1Channel4IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [1];
+                        ErrorStatusList01 [3] = errorStateBrushList [1];
+                        ErrorStatusList0 [3] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [0];
+                        ErrorStatusList01 [3] = errorStateBrushList [1];
+                        ErrorStatusList0 [3] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [1];
+                        ErrorStatusList01 [3] = errorStateBrushList [0];
+                        ErrorStatusList0 [3] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [0];
+                        ErrorStatusList01 [3] = errorStateBrushList [0];
+                        ErrorStatusList0 [3] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [1];
+                        ErrorStatusList01 [3] = errorStateBrushList [1];
+                        ErrorStatusList0 [3] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [0];
+                        ErrorStatusList01 [3] = errorStateBrushList [1];
+                        ErrorStatusList0 [3] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [1];
+                        ErrorStatusList01 [3] = errorStateBrushList [0];
+                        ErrorStatusList0 [3] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [0];
+                        ErrorStatusList01 [3] = errorStateBrushList [0];
+                        ErrorStatusList0 [3] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [3] = errorStateBrushList [3];
+                        ErrorStatusList01 [3] = errorStateBrushList [3];
+                        ErrorStatusList0 [3] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card1Channel5IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [1];
+                        ErrorStatusList01 [4] = errorStateBrushList [1];
+                        ErrorStatusList0 [4] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [0];
+                        ErrorStatusList01 [4] = errorStateBrushList [1];
+                        ErrorStatusList0 [4] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [1];
+                        ErrorStatusList01 [4] = errorStateBrushList [0];
+                        ErrorStatusList0 [4] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [0];
+                        ErrorStatusList01 [4] = errorStateBrushList [0];
+                        ErrorStatusList0 [4] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [1];
+                        ErrorStatusList01 [4] = errorStateBrushList [1];
+                        ErrorStatusList0 [4] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [0];
+                        ErrorStatusList01 [4] = errorStateBrushList [1];
+                        ErrorStatusList0 [4] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [1];
+                        ErrorStatusList01 [4] = errorStateBrushList [0];
+                        ErrorStatusList0 [4] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [0];
+                        ErrorStatusList01 [4] = errorStateBrushList [0];
+                        ErrorStatusList0 [4] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [4] = errorStateBrushList [3];
+                        ErrorStatusList01 [4] = errorStateBrushList [3];
+                        ErrorStatusList0 [4] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card1Channel6IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [1];
+                        ErrorStatusList01 [5] = errorStateBrushList [1];
+                        ErrorStatusList0 [5] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [0];
+                        ErrorStatusList01 [5] = errorStateBrushList [1];
+                        ErrorStatusList0 [5] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [1];
+                        ErrorStatusList01 [5] = errorStateBrushList [0];
+                        ErrorStatusList0 [5] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [0];
+                        ErrorStatusList01 [5] = errorStateBrushList [0];
+                        ErrorStatusList0 [5] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [1];
+                        ErrorStatusList01 [5] = errorStateBrushList [1];
+                        ErrorStatusList0 [5] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [0];
+                        ErrorStatusList01 [5] = errorStateBrushList [1];
+                        ErrorStatusList0 [5] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [1];
+                        ErrorStatusList01 [5] = errorStateBrushList [0];
+                        ErrorStatusList0 [5] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [0];
+                        ErrorStatusList01 [5] = errorStateBrushList [0];
+                        ErrorStatusList0 [5] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [5] = errorStateBrushList [3];
+                        ErrorStatusList01 [5] = errorStateBrushList [3];
+                        ErrorStatusList0 [5] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card1Channel7IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [1];
+                        ErrorStatusList01 [6] = errorStateBrushList [1];
+                        ErrorStatusList0 [6] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [0];
+                        ErrorStatusList01 [6] = errorStateBrushList [1];
+                        ErrorStatusList0 [6] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [1];
+                        ErrorStatusList01 [6] = errorStateBrushList [0];
+                        ErrorStatusList0 [6] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [0];
+                        ErrorStatusList01 [6] = errorStateBrushList [0];
+                        ErrorStatusList0 [6] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [1];
+                        ErrorStatusList01 [6] = errorStateBrushList [1];
+                        ErrorStatusList0 [6] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [0];
+                        ErrorStatusList01 [6] = errorStateBrushList [1];
+                        ErrorStatusList0 [6] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [1];
+                        ErrorStatusList01 [6] = errorStateBrushList [0];
+                        ErrorStatusList0 [6] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [0];
+                        ErrorStatusList01 [6] = errorStateBrushList [0];
+                        ErrorStatusList0 [6] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [6] = errorStateBrushList [3];
+                        ErrorStatusList01 [6] = errorStateBrushList [3];
+                        ErrorStatusList0 [6] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card1Channel8IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [1];
+                        ErrorStatusList01 [7] = errorStateBrushList [1];
+                        ErrorStatusList0 [7] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [0];
+                        ErrorStatusList01 [7] = errorStateBrushList [1];
+                        ErrorStatusList0 [7] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [1];
+                        ErrorStatusList01 [7] = errorStateBrushList [0];
+                        ErrorStatusList0 [7] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [0];
+                        ErrorStatusList01 [7] = errorStateBrushList [0];
+                        ErrorStatusList0 [7] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [1];
+                        ErrorStatusList01 [7] = errorStateBrushList [1];
+                        ErrorStatusList0 [7] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [0];
+                        ErrorStatusList01 [7] = errorStateBrushList [1];
+                        ErrorStatusList0 [7] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [1];
+                        ErrorStatusList01 [7] = errorStateBrushList [0];
+                        ErrorStatusList0 [7] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [0];
+                        ErrorStatusList01 [7] = errorStateBrushList [0];
+                        ErrorStatusList0 [7] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList0 [7] = errorStateBrushList [3];
+                        ErrorStatusList01 [7] = errorStateBrushList [3];
+                        ErrorStatusList0 [7] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel1IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [1];
+                        ErrorStatusList11 [0] = errorStateBrushList [1];
+                        ErrorStatusList1 [0] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [0];
+                        ErrorStatusList11 [0] = errorStateBrushList [1];
+                        ErrorStatusList1 [0] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [1];
+                        ErrorStatusList11 [0] = errorStateBrushList [0];
+                        ErrorStatusList1 [0] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [0];
+                        ErrorStatusList11 [0] = errorStateBrushList [0];
+                        ErrorStatusList1 [0] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [1];
+                        ErrorStatusList11 [0] = errorStateBrushList [1];
+                        ErrorStatusList1 [0] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [0];
+                        ErrorStatusList11 [0] = errorStateBrushList [1];
+                        ErrorStatusList1 [0] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [1];
+                        ErrorStatusList11 [0] = errorStateBrushList [0];
+                        ErrorStatusList1 [0] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [0];
+                        ErrorStatusList11 [0] = errorStateBrushList [0];
+                        ErrorStatusList1 [0] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [0] = errorStateBrushList [3];
+                        ErrorStatusList11 [0] = errorStateBrushList [3];
+                        ErrorStatusList1 [0] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel2IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [1];
+                        ErrorStatusList11 [1] = errorStateBrushList [1];
+                        ErrorStatusList1 [1] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [0];
+                        ErrorStatusList11 [1] = errorStateBrushList [1];
+                        ErrorStatusList1 [1] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [1];
+                        ErrorStatusList11 [1] = errorStateBrushList [0];
+                        ErrorStatusList1 [1] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [0];
+                        ErrorStatusList11 [1] = errorStateBrushList [0];
+                        ErrorStatusList1 [1] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [1];
+                        ErrorStatusList11 [1] = errorStateBrushList [1];
+                        ErrorStatusList1 [1] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [0];
+                        ErrorStatusList11 [1] = errorStateBrushList [1];
+                        ErrorStatusList1 [1] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [1];
+                        ErrorStatusList11 [1] = errorStateBrushList [0];
+                        ErrorStatusList1 [1] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [0];
+                        ErrorStatusList11 [1] = errorStateBrushList [0];
+                        ErrorStatusList1 [1] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [1] = errorStateBrushList [3];
+                        ErrorStatusList11 [1] = errorStateBrushList [3];
+                        ErrorStatusList1 [1] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel3IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [1];
+                        ErrorStatusList11 [2] = errorStateBrushList [1];
+                        ErrorStatusList1 [2] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [0];
+                        ErrorStatusList11 [2] = errorStateBrushList [1];
+                        ErrorStatusList1 [2] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [1];
+                        ErrorStatusList11 [2] = errorStateBrushList [0];
+                        ErrorStatusList1 [2] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [0];
+                        ErrorStatusList11 [2] = errorStateBrushList [0];
+                        ErrorStatusList1 [2] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [1];
+                        ErrorStatusList11 [2] = errorStateBrushList [1];
+                        ErrorStatusList1 [2] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [0];
+                        ErrorStatusList11 [2] = errorStateBrushList [1];
+                        ErrorStatusList1 [2] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [1];
+                        ErrorStatusList11 [2] = errorStateBrushList [0];
+                        ErrorStatusList1 [2] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [0];
+                        ErrorStatusList11 [2] = errorStateBrushList [0];
+                        ErrorStatusList1 [2] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [2] = errorStateBrushList [3];
+                        ErrorStatusList11 [2] = errorStateBrushList [3];
+                        ErrorStatusList1 [2] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel4IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [1];
+                        ErrorStatusList11 [3] = errorStateBrushList [1];
+                        ErrorStatusList1 [3] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [0];
+                        ErrorStatusList11 [3] = errorStateBrushList [1];
+                        ErrorStatusList1 [3] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [1];
+                        ErrorStatusList11 [3] = errorStateBrushList [0];
+                        ErrorStatusList1 [3] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [0];
+                        ErrorStatusList11 [3] = errorStateBrushList [0];
+                        ErrorStatusList1 [3] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [1];
+                        ErrorStatusList11 [3] = errorStateBrushList [1];
+                        ErrorStatusList1 [3] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [0];
+                        ErrorStatusList11 [3] = errorStateBrushList [1];
+                        ErrorStatusList1 [3] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [1];
+                        ErrorStatusList11 [3] = errorStateBrushList [0];
+                        ErrorStatusList1 [3] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [0];
+                        ErrorStatusList11 [3] = errorStateBrushList [0];
+                        ErrorStatusList1 [3] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [3] = errorStateBrushList [3];
+                        ErrorStatusList11 [3] = errorStateBrushList [3];
+                        ErrorStatusList1 [3] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel5IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [1];
+                        ErrorStatusList11 [4] = errorStateBrushList [1];
+                        ErrorStatusList1 [4] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [0];
+                        ErrorStatusList11 [4] = errorStateBrushList [1];
+                        ErrorStatusList1 [4] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [1];
+                        ErrorStatusList11 [4] = errorStateBrushList [0];
+                        ErrorStatusList1 [4] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [0];
+                        ErrorStatusList11 [4] = errorStateBrushList [0];
+                        ErrorStatusList1 [4] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [1];
+                        ErrorStatusList11 [4] = errorStateBrushList [1];
+                        ErrorStatusList1 [4] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [0];
+                        ErrorStatusList11 [4] = errorStateBrushList [1];
+                        ErrorStatusList1 [4] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [1];
+                        ErrorStatusList11 [4] = errorStateBrushList [0];
+                        ErrorStatusList1 [4] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [0];
+                        ErrorStatusList11 [4] = errorStateBrushList [0];
+                        ErrorStatusList1 [4] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [4] = errorStateBrushList [3];
+                        ErrorStatusList11 [4] = errorStateBrushList [3];
+                        ErrorStatusList1 [4] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel6IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [1];
+                        ErrorStatusList11 [5] = errorStateBrushList [1];
+                        ErrorStatusList1 [5] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [0];
+                        ErrorStatusList11 [5] = errorStateBrushList [1];
+                        ErrorStatusList1 [5] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [1];
+                        ErrorStatusList11 [5] = errorStateBrushList [0];
+                        ErrorStatusList1 [5] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [0];
+                        ErrorStatusList11 [5] = errorStateBrushList [0];
+                        ErrorStatusList1 [5] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [1];
+                        ErrorStatusList11 [5] = errorStateBrushList [1];
+                        ErrorStatusList1 [5] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [0];
+                        ErrorStatusList11 [5] = errorStateBrushList [1];
+                        ErrorStatusList1 [5] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [1];
+                        ErrorStatusList11 [5] = errorStateBrushList [0];
+                        ErrorStatusList1 [5] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [0];
+                        ErrorStatusList11 [5] = errorStateBrushList [0];
+                        ErrorStatusList1 [5] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [5] = errorStateBrushList [3];
+                        ErrorStatusList11 [5] = errorStateBrushList [3];
+                        ErrorStatusList1 [5] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel7IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [1];
+                        ErrorStatusList11 [6] = errorStateBrushList [1];
+                        ErrorStatusList1 [6] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [0];
+                        ErrorStatusList11 [6] = errorStateBrushList [1];
+                        ErrorStatusList1 [6] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [1];
+                        ErrorStatusList11 [6] = errorStateBrushList [0];
+                        ErrorStatusList1 [6] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [0];
+                        ErrorStatusList11 [6] = errorStateBrushList [0];
+                        ErrorStatusList1 [6] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [1];
+                        ErrorStatusList11 [6] = errorStateBrushList [1];
+                        ErrorStatusList1 [6] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [0];
+                        ErrorStatusList11 [6] = errorStateBrushList [1];
+                        ErrorStatusList1 [6] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [1];
+                        ErrorStatusList11 [6] = errorStateBrushList [0];
+                        ErrorStatusList1 [6] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [0];
+                        ErrorStatusList11 [6] = errorStateBrushList [0];
+                        ErrorStatusList1 [6] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [6] = errorStateBrushList [3];
+                        ErrorStatusList11 [6] = errorStateBrushList [3];
+                        ErrorStatusList1 [6] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card2Channel8IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [1];
+                        ErrorStatusList11 [7] = errorStateBrushList [1];
+                        ErrorStatusList1 [7] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [0];
+                        ErrorStatusList11 [7] = errorStateBrushList [1];
+                        ErrorStatusList1 [7] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [1];
+                        ErrorStatusList11 [7] = errorStateBrushList [0];
+                        ErrorStatusList1 [7] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [0];
+                        ErrorStatusList11 [7] = errorStateBrushList [0];
+                        ErrorStatusList1 [7] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [1];
+                        ErrorStatusList11 [7] = errorStateBrushList [1];
+                        ErrorStatusList1 [7] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [0];
+                        ErrorStatusList11 [7] = errorStateBrushList [1];
+                        ErrorStatusList1 [7] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [1];
+                        ErrorStatusList11 [7] = errorStateBrushList [0];
+                        ErrorStatusList1 [7] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [0];
+                        ErrorStatusList11 [7] = errorStateBrushList [0];
+                        ErrorStatusList1 [7] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList1 [7] = errorStateBrushList [3];
+                        ErrorStatusList11 [7] = errorStateBrushList [3];
+                        ErrorStatusList1 [7] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel1IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [1];
+                        ErrorStatusList21 [0] = errorStateBrushList [1];
+                        ErrorStatusList2 [0] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [0];
+                        ErrorStatusList21 [0] = errorStateBrushList [1];
+                        ErrorStatusList2 [0] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [1];
+                        ErrorStatusList21 [0] = errorStateBrushList [0];
+                        ErrorStatusList2 [0] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [0];
+                        ErrorStatusList21 [0] = errorStateBrushList [0];
+                        ErrorStatusList2 [0] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [1];
+                        ErrorStatusList21 [0] = errorStateBrushList [1];
+                        ErrorStatusList2 [0] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [0];
+                        ErrorStatusList21 [0] = errorStateBrushList [1];
+                        ErrorStatusList2 [0] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [1];
+                        ErrorStatusList21 [0] = errorStateBrushList [0];
+                        ErrorStatusList2 [0] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [0];
+                        ErrorStatusList21 [0] = errorStateBrushList [0];
+                        ErrorStatusList2 [0] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [0] = errorStateBrushList [3];
+                        ErrorStatusList21 [0] = errorStateBrushList [3];
+                        ErrorStatusList2 [0] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel2IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [1];
+                        ErrorStatusList21 [1] = errorStateBrushList [1];
+                        ErrorStatusList2 [1] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [0];
+                        ErrorStatusList21 [1] = errorStateBrushList [1];
+                        ErrorStatusList2 [1] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [1];
+                        ErrorStatusList21 [1] = errorStateBrushList [0];
+                        ErrorStatusList2 [1] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [0];
+                        ErrorStatusList21 [1] = errorStateBrushList [0];
+                        ErrorStatusList2 [1] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [1];
+                        ErrorStatusList21 [1] = errorStateBrushList [1];
+                        ErrorStatusList2 [1] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [0];
+                        ErrorStatusList21 [1] = errorStateBrushList [1];
+                        ErrorStatusList2 [1] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [1];
+                        ErrorStatusList21 [1] = errorStateBrushList [0];
+                        ErrorStatusList2 [1] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [0];
+                        ErrorStatusList21 [1] = errorStateBrushList [0];
+                        ErrorStatusList2 [1] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [1] = errorStateBrushList [3];
+                        ErrorStatusList21 [1] = errorStateBrushList [3];
+                        ErrorStatusList2 [1] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel3IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [1];
+                        ErrorStatusList21 [2] = errorStateBrushList [1];
+                        ErrorStatusList2 [2] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [0];
+                        ErrorStatusList21 [2] = errorStateBrushList [1];
+                        ErrorStatusList2 [2] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [1];
+                        ErrorStatusList21 [2] = errorStateBrushList [0];
+                        ErrorStatusList2 [2] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [0];
+                        ErrorStatusList21 [2] = errorStateBrushList [0];
+                        ErrorStatusList2 [2] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [1];
+                        ErrorStatusList21 [2] = errorStateBrushList [1];
+                        ErrorStatusList2 [2] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [0];
+                        ErrorStatusList21 [2] = errorStateBrushList [1];
+                        ErrorStatusList2 [2] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [1];
+                        ErrorStatusList21 [2] = errorStateBrushList [0];
+                        ErrorStatusList2 [2] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [0];
+                        ErrorStatusList21 [2] = errorStateBrushList [0];
+                        ErrorStatusList2 [2] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [2] = errorStateBrushList [3];
+                        ErrorStatusList21 [2] = errorStateBrushList [3];
+                        ErrorStatusList2 [2] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel4IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [1];
+                        ErrorStatusList21 [3] = errorStateBrushList [1];
+                        ErrorStatusList2 [3] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [0];
+                        ErrorStatusList21 [3] = errorStateBrushList [1];
+                        ErrorStatusList2 [3] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [1];
+                        ErrorStatusList21 [3] = errorStateBrushList [0];
+                        ErrorStatusList2 [3] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [0];
+                        ErrorStatusList21 [3] = errorStateBrushList [0];
+                        ErrorStatusList2 [3] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [1];
+                        ErrorStatusList21 [3] = errorStateBrushList [1];
+                        ErrorStatusList2 [3] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [0];
+                        ErrorStatusList21 [3] = errorStateBrushList [1];
+                        ErrorStatusList2 [3] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [1];
+                        ErrorStatusList21 [3] = errorStateBrushList [0];
+                        ErrorStatusList2 [3] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [0];
+                        ErrorStatusList21 [3] = errorStateBrushList [0];
+                        ErrorStatusList2 [3] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [3] = errorStateBrushList [3];
+                        ErrorStatusList21 [3] = errorStateBrushList [3];
+                        ErrorStatusList2 [3] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel5IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [1];
+                        ErrorStatusList21 [4] = errorStateBrushList [1];
+                        ErrorStatusList2 [4] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [0];
+                        ErrorStatusList21 [4] = errorStateBrushList [1];
+                        ErrorStatusList2 [4] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [1];
+                        ErrorStatusList21 [4] = errorStateBrushList [0];
+                        ErrorStatusList2 [4] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [0];
+                        ErrorStatusList21 [4] = errorStateBrushList [0];
+                        ErrorStatusList2 [4] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [1];
+                        ErrorStatusList21 [4] = errorStateBrushList [1];
+                        ErrorStatusList2 [4] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [0];
+                        ErrorStatusList21 [4] = errorStateBrushList [1];
+                        ErrorStatusList2 [4] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [1];
+                        ErrorStatusList21 [4] = errorStateBrushList [0];
+                        ErrorStatusList2 [4] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [0];
+                        ErrorStatusList21 [4] = errorStateBrushList [0];
+                        ErrorStatusList2 [4] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [4] = errorStateBrushList [3];
+                        ErrorStatusList21 [4] = errorStateBrushList [3];
+                        ErrorStatusList2 [4] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel6IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [1];
+                        ErrorStatusList21 [5] = errorStateBrushList [1];
+                        ErrorStatusList2 [5] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [0];
+                        ErrorStatusList21 [5] = errorStateBrushList [1];
+                        ErrorStatusList2 [5] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [1];
+                        ErrorStatusList21 [5] = errorStateBrushList [0];
+                        ErrorStatusList2 [5] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [0];
+                        ErrorStatusList21 [5] = errorStateBrushList [0];
+                        ErrorStatusList2 [5] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [1];
+                        ErrorStatusList21 [5] = errorStateBrushList [1];
+                        ErrorStatusList2 [5] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [0];
+                        ErrorStatusList21 [5] = errorStateBrushList [1];
+                        ErrorStatusList2 [5] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [1];
+                        ErrorStatusList21 [5] = errorStateBrushList [0];
+                        ErrorStatusList2 [5] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [0];
+                        ErrorStatusList21 [5] = errorStateBrushList [0];
+                        ErrorStatusList2 [5] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [5] = errorStateBrushList [3];
+                        ErrorStatusList21 [5] = errorStateBrushList [3];
+                        ErrorStatusList2 [5] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel7IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [1];
+                        ErrorStatusList21 [6] = errorStateBrushList [1];
+                        ErrorStatusList2 [6] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [0];
+                        ErrorStatusList21 [6] = errorStateBrushList [1];
+                        ErrorStatusList2 [6] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [1];
+                        ErrorStatusList21 [6] = errorStateBrushList [0];
+                        ErrorStatusList2 [6] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [0];
+                        ErrorStatusList21 [6] = errorStateBrushList [0];
+                        ErrorStatusList2 [6] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [1];
+                        ErrorStatusList21 [6] = errorStateBrushList [1];
+                        ErrorStatusList2 [6] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [0];
+                        ErrorStatusList21 [6] = errorStateBrushList [1];
+                        ErrorStatusList2 [6] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [1];
+                        ErrorStatusList21 [6] = errorStateBrushList [0];
+                        ErrorStatusList2 [6] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [0];
+                        ErrorStatusList21 [6] = errorStateBrushList [0];
+                        ErrorStatusList2 [6] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [6] = errorStateBrushList [3];
+                        ErrorStatusList21 [6] = errorStateBrushList [3];
+                        ErrorStatusList2 [6] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if ( updateType == "Card3Channel8IsOkChanged" )
+            {
+                /* 0- Ok
+                 * 1- shortCircuit
+                 * 2- overCurrent
+                 * 3- shortCircuit + overCurrent
+                 * 4- voltageError
+                 * 5- shortCircuit + voltageError
+                 * 6- overCurrent + voltageError
+                 * 7- shortCircuit + overCurrent + voltageError
+                 * 128- No communication
+                 */
+                switch ( data )
+                {
+                    case "0":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [1];
+                        ErrorStatusList21 [7] = errorStateBrushList [1];
+                        ErrorStatusList2 [7] = errorStateBrushList [1];
+                        break;
+                    case "1":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [0];
+                        ErrorStatusList21 [7] = errorStateBrushList [1];
+                        ErrorStatusList2 [7] = errorStateBrushList [1];
+                        break;
+                    case "2":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [1];
+                        ErrorStatusList21 [7] = errorStateBrushList [0];
+                        ErrorStatusList2 [7] = errorStateBrushList [1];
+                        break;
+                    case "3":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [0];
+                        ErrorStatusList21 [7] = errorStateBrushList [0];
+                        ErrorStatusList2 [7] = errorStateBrushList [1];
+                        break;
+                    case "4":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [1];
+                        ErrorStatusList21 [7] = errorStateBrushList [1];
+                        ErrorStatusList2 [7] = errorStateBrushList [0];
+                        break;
+                    case "5":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [0];
+                        ErrorStatusList21 [7] = errorStateBrushList [1];
+                        ErrorStatusList2 [7] = errorStateBrushList [0];
+                        break;
+                    case "6":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [1];
+                        ErrorStatusList21 [7] = errorStateBrushList [0];
+                        ErrorStatusList2 [7] = errorStateBrushList [0];
+                        break;
+                    case "7":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [0];
+                        ErrorStatusList21 [7] = errorStateBrushList [0];
+                        ErrorStatusList2 [7] = errorStateBrushList [0];
+                        break;
+                    case "128":
+                        ErrorStatusShortCircuitList2 [7] = errorStateBrushList [3];
+                        ErrorStatusList21 [7] = errorStateBrushList [3];
+                        ErrorStatusList2 [7] = errorStateBrushList [3];
+                        break;
+                    default:
+                        break;
                 }
             }
             else if ( updateType == "ErrorReceived" )
